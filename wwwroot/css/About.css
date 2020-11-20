@@ -1,0 +1,85 @@
+.devs {
+	padding-top: 10px;
+	display: flex;
+	height: 100%;
+}
+
+.person  {
+	padding: 7px;
+	width: 33.33%;
+	min-height: 700px;
+	text-align: justify;
+}
+
+.image {
+	height:100%;
+	width:100%;
+	min-height: 250px;
+	
+}
+.git  {
+	padding: 7px;
+	width: 33.33%;
+	min-height: 200px;
+	text-align: justify;
+	margin: 0 auto;
+}
+
+
+.img_container {
+	height:53%;
+	width:80%;
+	overflow:hidden;
+	margin: 0 auto;
+	border-radius: 150px;
+	border:5px solid black;
+}
+
+#img_border {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	
+}
+
+#imaged {	
+	height:30%;
+	border-radius: 0;
+	border:0;
+	max-width:800px;
+}
+
+#git_img {
+	min-height: 100px;
+}
+
+#git_columns {
+	width:80%;
+	overflow:hidden;
+	margin: 0 auto;	
+	height:100%;
+}
+
+.header {
+	text-align: center;
+}
+
+.data_model {
+	min-height: 250px;
+	max-height: 300 px;
+	border-top: 1px solid black;
+}
+
+.github_links {
+	min-height: 250px;
+	border-top: 1px solid black;
+}
+
+.thankyou_img_container {
+	height:53%;
+	width:70%;
+	overflow:hidden;
+	margin: 0 auto;
+	border-radius: 150px;
+	max-height: 400px;
+
+}

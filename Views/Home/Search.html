@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html charset="utf-8">
+    <title>Search</title>
+    <link href="CSS/MainStyle.css" rel="stylesheet" type="text/css">
+    <link href="CSS/FormStyles.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="Scripts/Search.js"></script>
+</head>
+
+<body>
+<div class="body">
+    <div class="header">
+	<div class="innerheader">
+            <div class="logopic">
+                <a href="index.html" class="homelink"></a>
+            </div>
+            <div class="logotextcont">
+                <h1 class="logotext">Search Campground Reservations</h1>
+            </div>            		 		
+	</div>
+    </div>
+    <div class="menu">
+        <div class="menufiller">
+			<div class="button"><a class="buttonlink" href="index.html">Home</a></div>
+			<div class="button"><a class="buttonlink" id="currentPageUnderline" href="Search.html">Park Search</a></div>	
+			<div class="button"><a class="buttonlink" href="Reservations.html">Reservations</a></div>
+			<div class="button"><a class="buttonlink" href="About.html">About</a></div>
+		</div>        
+    </div>    
+    <div class ="bodycont">
+            <h1 align="center">National Park Search</h1>
+			<p id="intro">Search for a park to get some information about the park. You can see how many campgrounds are available and select the one you would like to reserve.</p> 
+			<p id="intro">If you want to modify your existing reservation please go to our <a href="Reservations.html">Reservations</a> page.</p>
+
+            <div class="search_park_form_div">
+			
+				<div class="form_lines">
+					<label>Description:</label> <input type="search" id = "park_name" class="field-long"/> 
+				</div>
+				<div class="form_lines">
+					<label>State: </label>					
+					<select name="states" id = "park_state" class="field-long">	
+						<option value="" text =""/>
+					</select>
+				</div>
+				<div class="form_lines">
+					<label>Park Name: </label>
+					<select name="park_codes" id = "park_code" class="field-long">
+						<option value="" text =""/>
+					</select>
+				</div>
+				<div class="form_lines"><button id="search_click">Search</button></div>
+            </div>      
+
+			<div class="results">				
+				<div class="output">
+				</div>				
+			</div>
+        </div>
+  
+    
+		
+        
+    <div class="footer">
+        <hr class="colored">
+        <div class="footerfillerbox"></div>
+        <div class="mediabox">
+            <a href = "https://www.instagram.com/nationalparkservice">
+                <img src = "Images/Email.png" class="imgicons" id="imgEmail"/>
+            </a>
+        </div>               
+        <div class="mediabox">
+            <a href = "https://www.facebook.com/nationalparkservice">
+                <img src = "Images/Facebook.png" class="imgicons" id="imgFacebook"/>
+            </a>
+        </div>
+        <div class="mediaboxtext">
+            National Parks Service
+        </div>                   
+        
+    </div>
+	
+  </div>
+</body>
+</html>

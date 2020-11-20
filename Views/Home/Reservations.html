@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html charset="utf-8">
+    <title>Reservations</title>
+    <link href="CSS/MainStyle.css" rel="stylesheet" type="text/css">
+    <link href="CSS/FormStyles.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="Scripts/Reservation.js"></script>
+</head>
+
+<body>
+<div class="body">
+    <div class="header">
+	<div class="innerheader">
+            <div class="logopic">
+                <a href="index.html" class="homelink"></a>
+            </div>
+            <div class="logotextcont">
+                <h1 class="logotext">Campground Reservations</h1>
+            </div>            		 		
+	</div>
+    </div>
+    <div class="menu">
+        <div class="menufiller">
+			<div class="button"><a class="buttonlink" href="index.html">Home</a></div>
+			<div class="button"><a class="buttonlink" href="Search.html">Park Search</a></div>	
+			<div class="button"><a class="buttonlink" id="currentPageUnderline" href="Reservations.html">Reservations</a></div>
+			<div class="button"><a class="buttonlink" href="About.html">About</a></div>
+		</div>        
+    </div>    
+    <div class ="bodycont">
+            <h1 align="center">National Park Campground Reservation</h1>			
+			<p id="intro">Please go to <a href="Search.html">Search</a> page to find the campground you would like to reserve. To modify existing reservation please enter your reservation ID below.</p> 
+			<div class="search_park_form_div" id ="wider_reservation_search">
+				<div class="search_reservation">
+					<label>Reservation ID: </label>
+					<input class="field-short" id="reservationNum" type="search" value="123"/>
+					<button id="find_reservation">Search</button>
+				</div>
+			</div>
+			<div><p id="intro" class="no_results">Reservation Not Found! Please enter valid reservation number (123)</p></div>
+            <div class="search_park_form_div" id ="wider_reservation_form">
+			<table width="100%" cellpadding="0" cellspacing="0">
+			  <tr valign="top">
+
+			  <td style="padding: 15px;">  <!-- Left, wider white column -->
+				
+				<h2 class="treb-blue-150" style="margin: 0 0 1px 0;">
+		Online Reservation Form
+				</h2>				
+				  <br>
+            <table cellpadding=10 cellspacing=3 border=2><tr><td>
+				<div class="reservation_control_buttons">
+					<button id="update_reservation">Update</button>
+					<button id="delete_reservation">Delete</button>
+				</div>
+            <font size="3" face="Arial">
+            <b>Reserve your site now by filling out the form below:</b>
+            </font>
+
+            <form method="post" action="Thankyou.html">
+            <input type=hidden name="recipient" value="youraddress@yourdomain.com">
+            <input type=hidden name="subject" value="Reservation Form Submission">
+            <input type=hidden name="redirect" value="thankyou.html">
+			<div class="reservation_params_frame">
+				<label id="park_name">Park Name:</label><br>
+				<label id="camp_name">Campground:</label>
+			</div>
+
+            <table border=0 width=450>
+
+              <tr><td>First Name(s):</td><td colspan=2> <input type="text" name="Cust_First_Names" size=30></td></tr>
+              <tr><td>Last Name:</td><td colspan=2> <input type="text" name="Cust_Last_Name"  size=30></td></tr>
+              <tr><td>Street Address:</td><td colspan=2> <input type="text" name="Cust_Address_1" size=42></td></tr>
+              <tr><td>&nbsp; &nbsp; &nbsp; &nbsp; (continued):</td><td colspan=2> <input type="text" name="Cust_Address_2" size=42></td></tr>
+
+              <tr><td>City:<br> <input type="text" name="Cust_City"size=20></td>&nbsp;
+              <td>State/Province:<br> <input type="text" name="Cust_State" size=5></td>&nbsp;
+              <td>Zip/Postal Code:<br> <input type="text" name="Cust_Zip" size=10></td></tr>
+              <td>Country: </td><td colspan=2><input type="text" name="Cust_Country" size=15> (if non-U.S.)</td></tr>
+
+
+              <tr><td>Home Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_1" size=14></td></tr>
+              <tr><td>Work Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_2" size=14></td></tr>
+              <tr><td>Cell Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_3" size=14></td></tr>
+              <tr><td>Email Address: </td><td colspan=2> <input type="text" name="Cust_Email" size=25></td></tr>
+
+              <tr><td>Type of Camper: </td><td colspan=2> <select name="Rig_Type" >
+              <option value="Diesel MH">Diesel Class A Motorhome
+              <option value="Class A MH">Gasoline Class A Motorhome
+              <option value="Class C MH">Class C Motorhome
+              <option value="Class B MH">Van or Class B Motorhome
+              <option value="Truck Camper">Truck Camper
+              <option value="Fifth Wheel">Fifth Wheel
+              <option value="Trailer">Travel Trailer
+              <option value="Popup">Pop-Up Trailer
+              <option value="Tent">Tent
+              <option value="None">None
+              </select></td></tr>
+
+
+              <tr><td>Length of Camper: </td><td colspan=2>  <input type="text" name="Rig_Length" size=2>Feet</td></tr>
+
+              </table>
+
+              <table>
+              <tr><td>Number of Adults?  <select name="Num_Adults">
+              <option value="1">1
+              <option value="2">2
+              <option value="3">3
+              <option value="4">4
+              <option value="5">5
+              <option value="6">6
+              </select>
+                Children?  <select name="Num_Children">
+              <option value="0">0
+              <option value="1">1
+              <option value="2">2
+              <option value="3">3
+              <option value="4">4
+              <option value="5">5
+              <option value="6">6
+              </select><br>
+               Number of Pets?  <select name="Num_Pets">
+              <option value="0">0
+              <option value="1">1
+              <option value="2">2
+              <option value="3">3
+              <option value="4">4
+              </select>
+              Description of pets:  <input type="text" name="Pets_Desc" size=14>
+              </td></tr>
+              </table>
+
+              <table>
+
+              <tr>
+
+              <td>
+              <br>
+              <b>Site Requirements:</b>
+              <br>
+              <br>
+              Number of sites: <input type="text" size=3 name="Num_Sites">
+                <br>
+              
+              <tr>
+              <td>
+              Type of site or accomodation:</td><td><select name="Site_Type">
+              <option value="Normal RV">Normal RV Site
+              <option value="Deluxe RV">Deluxe RV Site
+              <option value="Drycamp">Dry camping area
+              <option value="Tent">Tent Site
+              <option value="Cabin">Cabin
+              <option value="Room">Motel Room
+              <option value="Pavilion">Pavilion rental
+              </select> &nbsp; &nbsp; </td></tr><tr><td></td><td>
+              <input type="checkbox" name="Attrib_Full-Hook-up">Full Hook-Up
+              <br><input type="checkbox" name="Attrib_50A">50 Amp Electric
+              <br><input type="checkbox"  name="Attrib_Pullthru">Pull-Thru
+              </td></tr>
+              <tr><td colspan=2>
+              Preferred Site(s): 
+              
+              <input type="text" size=30 name="Site_Name">
+              
+
+
+              </td></tr>
+
+              </table>
+
+
+              <table>
+              
+              <tr><td>
+              
+              <br><b>Dates Requested:</b>
+              <br>&nbsp;
+
+
+              <br>First Night:  
+              
+              
+              <select name="Resv_First_Date">
+              <option Value="Select Month">Select Month
+              <option value="1">January
+              <option value="2">February
+              <option value="3">March
+              <option value="4">April
+              <option value="5">May
+              <option value="6">June
+              <option value="7">July
+              <option value="8">August
+              <option value="9">September
+              <option value="10">October
+              <option value="11">November
+              <option value="12">December
+              </select>
+              
+
+              
+              
+              <select name="First_Date2">
+              <option value="Day">Day
+              <option value="1">1
+              <option value="2">2
+              <option value="3">3
+              <option value="4">4
+              <option value="5">5
+              <option value="6">6
+              <option value="7">7
+              <option value="8">8
+              <option value="9">9
+              <option value="10">10
+              <option value="11">11
+              <option value="12">12
+              <option value="13">13
+              <option value="14">14
+              <option value="15">15
+              <option value="16">16
+              <option value="17">17
+              <option value="18">18
+              <option value="19">19
+              <option value="20">20
+              <option value="21">21
+              <option value="22">22
+              <option value="23">23
+              <option value="24">24
+              <option value="25">25
+              <option value="26">26
+              <option value="27">27
+              <option value="28">28
+              <option value="29">29
+              <option value="30">30
+              <option value="31">31
+              </select>
+              
+              <select name="First_Date3">
+              <option value="2020">2020
+              <option value="2021">2021
+              <option value="2022">2022
+              <option value="2023">2023
+              <option value="2024">2024
+              </select>
+              
+
+              </td></tr>
+
+
+              <tr><td>Estimated arrival time:  <select name="Est_Time" >
+              <option value="10 AM">10 AM
+              <option value="11 AM">11 AM
+              <option value="12 PM">12 PM
+              <option value="1 PM">1 PM
+              <option value="2 PM">2 PM
+              <option value="3 PM">3 PM
+              <option value="4 PM">4 PM
+              <option value="5 PM">5 PM
+              <option value="6 PM">6 PM
+              <option value="7 PM">7 PM
+              <option value="8 PM">8 PM
+              <option value="9 PM">9 PM
+              <option value="10PM">10 PM
+              <option value="11PM">11 PM
+              <option value="12AM">12 AM
+              </select>
+              </td></tr>
+
+              <tr><td>
+              Number of nights: <input type="text" name="Num_Nights" size=4>
+              </td></tr>
+
+              <tr><td><br>How were you referred?  <select name="How_Found" >
+              <option value="Return visit">I've been here before
+              <option value="Friend">A Friend
+              <option value="Woodall's">Woodall's directory
+              <option value="Trailer Life">Trailer Life directory
+              <option value="Escapees">Escapees Directory
+              <option value="Coast/Coast">Coast to Coast
+              <option value="Passport Am.">Passport America
+              <option value="RPI">RPI directory
+              <option value="Other Guide">Other Camping Directory
+              <option value="Trailer Life Mag">Trailer Life Magazine
+              <option value="Motor Home">Motor Home Magazine
+              <option value="FMCA Mag">FMCA Magazine
+              <option value="Highways Mag">Highways Magazine
+              <option value="Camping Life">Camping Life Magazine
+              <option value="RV Companion">RV Companion Magazine
+              <option value="Magazine">Other Magazine
+              <option value="Phone book">Phone book
+              <option value="Internet">Internet
+              <option value="Signs">Highway Sign
+              <option value="Drove By">Drove By
+              <option value="AAA">AAA Auto club
+              <option value="Rally">RV Rally
+              <option value="Sports show">Sports show
+              <option value="Brochure">Brochure
+              <option value="Flyer">Flyer
+              <option value="TV">Television
+              <option value="Radio">Radio
+              <option value="Mail">Direct Mail
+              <option value="Chamber/Comm">Chamber of Commerce
+              <option value="Travel Info Ctr">Travel Information Center
+              <option value="Other">Other
+              </select></td></tr>
+
+              <tr><td>&nbsp;</td></tr>
+              <tr><td>Special Needs or Comments:  
+              </br><textarea NAME="Resv_Notes" ROWS=7 COLS=36></textarea></td></tr>
+              <tr><td>&nbsp;</td></tr>
+
+              </table>
+
+            </td></tr></table>
+
+
+
+        </p>
+
+      </td>  
+
+
+      </tr>
+
+    </table>
+			
+			<div class="form_lines">
+				<input type="submit" id="search_click_button"/>
+			
+			</div>  
+		</form>
+			
+        </div>
+    </div>
+
+    
+		
+        
+    <div class="footer">
+        <hr class="colored">
+        <div class="footerfillerbox"></div>
+        <div class="mediabox">
+            <a href = "https://www.instagram.com/nationalparkservice">
+                <img src = "Images/Email.png" class="imgicons" id="imgEmail"/>
+            </a>
+        </div>               
+        <div class="mediabox">
+            <a href = "https://www.facebook.com/nationalparkservice">
+                <img src = "Images/Facebook.png" class="imgicons" id="imgFacebook"/>
+            </a>
+        </div>
+        <div class="mediaboxtext">
+            National Parks Service
+        </div>                   
+        
+    </div>
+	
+	</div>
+</body>
+</html>

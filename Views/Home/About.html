@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html;  charset="UTF-8">
+    <title>About</title>
+    <link href="CSS/MainStyle.css" rel="stylesheet" type="text/css"> 
+	<link href="CSS/FormStyles.css" rel="stylesheet" type="text/css"> 
+	<link href="CSS/About.css" rel="stylesheet" type="text/css"> 
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+
+</head>
+
+<body>
+    <div class="body">
+    <div class="header">
+	<div class="innerheader">
+            <div class="logopic">
+                <a href="index.html" class="homelink"></a>
+            </div>
+            <div class="logotextcont">
+                <h1 class="logotext">About</h1>
+            </div>            		 		
+	</div>
+    </div>
+    <div class="menu">
+        <div class="menufiller">
+			<div class="button"><a class="buttonlink" href="index.html">Home</a></div>			
+			<div class="button"><a class="buttonlink" href="Search.html">Park Search</a></div>
+			<div class="button"><a class="buttonlink" href="Reservations.html">Reservations</a></div>
+			<div class="button"><a class="buttonlink" id="currentPageUnderline" href="About.html">About</a></div>
+		</div>        
+    </div> 
+
+    <div class="bodycont">
+        <div class="devs">
+            <div class="person">
+                <div class="img_container"><img src="Images/Daniel.jpg" class="image" /></div>
+                <h2 class="header">Daniel</h2>
+                <p>
+                    I have worked in research since 2008. And am currently pursueing an M.S. in the BAIS program
+                    As such, I am prone to validating and operationalizing data into applicable reporting.
+                    The National Parks Service API had many query options, with useful output that we could work with.
+                    After we decided on a reservation concept, I have formated the about page and some of the home page.
+                </p>
+            </div>
+            <div class="person" id="img_border">
+                <div class="img_container"><img src="Images/Alex.jpg" class="image" /></div>
+                <h2 class="header">Alex</h2>
+                <p>I have experience working as a backend developer as well as some front-end knowledge. I am passionate about learning new and existing technologies, and enjoy solving technical problems. For this Website I contributed backend National Park Service API calls for dynamic content as well as front page banner logic and dynamic elements in Park Search Page, and search scripts. I also contributed parameterized transitions between pages (i.e. search to reservation)</p>
+            </div>
+            <div class="person">
+                <div class="img_container"><img src="Images/Nilanjan.jpg" class="image" /></div>
+                <h2 class="header">Nilanjan</h2>
+                <p>I am currently working as a Software Engineer at AT&T. I am an avid learner for any new technology especially in the field of analytics, data science, and machine learning. After graduation, I aspire to work as a Data Scientist. 20 years down the line in the future I see myself working as CEO of a big IT company. On this website, I have worked in designing and developing the reservation module for campgrounds.</p>
+            </div>
+        </div>
+            <div class="data_model">
+                <h2 class="header">Data Model</h2>
+                <div class="img_container" id="imaged"><img src="Images/Datamodel.png" class="image" /></div>
+			</div>
+            <div class="github_links">
+                <h2 class="header">Github</h2>
+                <p id="intro">Code repository <a href="https://github.com/ZAlex1988/Group6_Assignment3">Link</a></p>
+				<p id="intro">Git Command output <b>(git log --author="<Github_ID>" --pretty=tformat: --numstat )</b>:</p>
+				<div class="devs">
+					<div class="git">
+						<img class="image" src="Images/gitOut.png" id="git_img"/>	
+					</div>
+				</div>
+            </div>    
+			</div>
+
+
+        
+        
+    <div class="footer">
+        <hr class="colored">
+        <div class="footerfillerbox"></div>
+        <div class="mediabox">
+            <a href = "https://www.instagram.com/nationalparkservice">
+                <img src = "Images/Email.png" class="imgicons" id="imgEmail"/>
+            </a>
+        </div>               
+        <div class="mediabox">
+            <a href = "https://www.facebook.com/nationalparkservice">
+                <img src = "Images/Facebook.png" class="imgicons" id="imgFacebook"/>
+            </a>
+        </div>
+        <div class="mediaboxtext">
+            National Parks Service
+        </div>                   
+        
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+@charset "utf-8";
+#intro {    
+    font-family: Arial;
+    font-size: calc(3pt + 1vw);
+    font-style: normal;
+    font-variant: normal;     
+    width: 70%;
+    margin: 0 auto;
+    text-indent: 2%;
+    text-align: justify;
+    text-justify: inter-word;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+.search_park_form_div {
+	margin:10px auto;
+	max-width: 400px;
+	font: 16px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.search_park_form_div input[type=search],
+select {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border:1px solid #BEBEBE;
+	padding: 7px 7px;
+	margin:0px;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;	
+
+
+}
+
+.search_park_form_div input[type=search]:focus,
+.search_park_form_div select:focus{
+	-moz-box-shadow: 0 0 8px #88D5E9;
+	-webkit-box-shadow: 0 0 8px #88D5E9;
+	box-shadow: 0 0 8px #88D5E9;
+	border: 1px solid #88D5E9;
+}
+
+.search_park_form_div button, 
+.search_park_form_div input[type=submit] {
+	background: #4B99AD;
+	border: none;
+	color: #fff;
+	margin: 0 auto;
+	padding: 7px 7px;
+	display:block;
+}
+.search_park_form_div button:hover,
+.search_park_form_div input[type=submit]:hover  {
+	background: #4691A4;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
+.search_park_form_div label {
+	font-weight: bold;
+	width: 30%;
+}
+
+.search_park_form_div .field-long {
+	width: 70%;
+}
+
+.search_park_form_div .field-short {
+	width: 30%;
+}
+
+.form_lines {
+	display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+	margin: 10px 0 10px 0;
+	
+}
+
+.search_reservation {
+	margin: 0 auto;
+	display:flex;
+	max-width: 450px;
+	
+}
+
+#wider_reservation_form {
+	max-width: 600px;
+	padding-bottom: 10px;
+}
+
+#wider_reservation_search {
+	max-width: 600px;
+	padding-bottom: 10px;
+}
+
+.reservation_control_buttons {
+	display:flex;
+	max-width: 200px;
+}
+
+.reservation_params_frame {
+	border: 1px solid green;
+	color: green;
+}
+.form_lines #search_click {
+	text-align:center;
+}
+
+.results {
+	padding: 30px 20px 20px 20px;
+	width: 80%;
+	margin: 0 auto;
+	height: 20%;
+	position: relative;
+	display: none;
+	overflow: auto;
+}
+
+.results .top-level {
+  margin: 3px 0 10px 0;
+  text-decoration: none;
+  transition: background-color .3s;
+  display: block;
+}
+
+p {
+	margin: 16px 0 0 0;
+}
+.top-level:hover {
+  background-color: #ffffed;
+}
+
+.no_results {
+	color: red;
+}
+
+/*Fees table*/
+#parksTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+}
+
+#parksTable td, #parksTable th {
+  border: 1px solid #ddd;
+}
+
+#parksTable tr:nth-child(even){background-color: #f2f2f2;}
+
+
+#parksTable th {
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.camp_button {
+  position: relative;
+  background-color: #4CAF50;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50px;
+  display:inline-block;
+}
+
+.camp_button:hover {
+	background: #4691A4;
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+.camp_button:after {
+  content: "";
+  background: #90EE90;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.camp_button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
