@@ -1,59 +1,30 @@
-﻿<div class="body">
-<div class="header">
-	<div class="innerheader">
-            <div class="logopic"><a href="index.html" class="homelink"></a></div>
-            <div class="logotextcont">
-                <h1 class="logotext">National Parks Campground Reservation Service</h1>
-            </div>
-  		 		
-	</div>
-</div>
-	<div class="menu">
-        <div class="menufiller">
-			<div class="button"><a class="buttonlink" id="currentPageUnderline" href="index.html">Home</a></div>			
-			<div class="button"><a class="buttonlink" href="Search.html">Park Search</a></div>
-			<div class="button"><a class="buttonlink" href="Reservations.html">Reservations</a></div>
-			<div class="button"><a class="buttonlink" href="About.html">About</a></div>
-		</div>        
-    </div> 
-    
-        
-        <div id="slider">
-            <img src="Images/Banner/1.jpg" id="image" />
-			<div class="slider_intro">
-				<p class="slider_intro_text">Welcome to the NPS Campgrounds reservation service. Although we have had to undergo new sanitization protocol,
-					there may be no better place to socially distance than in some of our great parks.</p>
-			</div>
-            <div class="left_hold">
-                <img onClick="rotateOnce(-1)" class="left" src="Images/Banner/LeftArrow.png"/>
-            </div>
-            <div class="right_hold">
-                <img onClick="rotateOnce(1)" class="right" src="Images/Banner/RightArrow.png"/>
-            </div>
-			<div class="slider_description">
-				<p class="slider_title" id="park_name">Everglades National Park</p>
-				<p class="slider_title" id="img_descr">Entrace Sign for the Everglades National Park</p>
-			</div>
-        </div> 
+﻿@{
+    ViewData["Title"] = "Home";
+}
 
-    
-    <div class="footer">
-        <hr class="colored"/>
-        <div class="footerfillerbox"></div>
-        <div class="mediabox">
-            <a href = "https://www.instagram.com/nationalparkservice">
-                <img src = "Images/Email.png" class="imgicons" id="imgEmail"/>
-            </a>
-        </div>               
-        <div class="mediabox">
-            <a href = "https://www.facebook.com/nationalparkservice">
-                <img src = "Images/Facebook.png" class="imgicons" id="imgFacebook"/>
-            </a>
-        </div>
-        <div class="mediaboxtext">
-            National Parks Service
-        </div>                   
-        
+@section custom_js_css {
+    <link href="/CSS/BannerStyle.css" rel="stylesheet" type="text/css">
+    <script src="/js/BannerScript.js"></script>
+}
+
+<div id="slider">
+    <img src="Images/Banner/1.jpg" id="image" />
+    <div class="slider_intro">
+        <p class="slider_intro_text">
+            Welcome to the NPS Campgrounds reservation service. Although we have had to undergo new sanitization protocol,
+            there may be no better place to socially distance than in some of our great parks.
+        </p>
+    </div>
+    <div class="left_hold">
+        <img onClick="rotateOnce(-1)" class="left" src="Images/Banner/LeftArrow.png" />
+    </div>
+    <div class="right_hold">
+        <img onClick="rotateOnce(1)" class="right" src="Images/Banner/RightArrow.png" />
+    </div>
+    <div class="slider_description">
+        <p class="slider_title" id="park_name">Everglades National Park</p>
+        <p class="slider_title" id="img_descr">Entrace Sign for the Everglades National Park</p>
     </div>
 </div>
+
 

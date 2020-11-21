@@ -33,5 +33,22 @@ namespace Assignment4.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult About()
+        {
+
+            return View();
+        }
+
+        public IActionResult Reservations()
+        {
+
+            return View();
+        }
+
+        public IActionResult Search()
+        {
+
+            return View();
+        }
     }
 }
