@@ -6,20 +6,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Assignment4.Models;
+using Assignment4.Services;
 
 namespace Assignment4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> log;
+        DataLoader Loader;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DataLoader DataLoader)
         {
-            _logger = logger;
+            Loader = DataLoader;
+            log = logger;
         }
 
         public IActionResult Index()
         {
+            if (Loader != null)
+            {
+                log.LogInformation("Data loader is not NULL! :)");
+                Loader.createAllNationalParksDB();
+            } else
+            {
+                log.LogInformation("Data loader is NULL! :'(");
+            }
             return View();
         }
 
@@ -31,7 +42,7 @@ namespace Assignment4.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         public IActionResult About()
         {
