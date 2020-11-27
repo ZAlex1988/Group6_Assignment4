@@ -52,12 +52,6 @@ namespace Assignment4.Controllers
             return View();
         }
 
-        public IActionResult Reservations()
-        {
-
-            return View();
-        }
-
 
         [HttpPost]
         public JsonResult GetImageUrls([FromBody] string [] parkCodes)

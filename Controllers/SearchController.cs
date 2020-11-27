@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Assignment4.DataAccess;
 using Assignment4.DBModel;
 using Assignment4.Models;
+using Assignment4.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,20 +15,26 @@ namespace Assignment4.Controllers
 {
     public class SearchController : Controller
     {
+        
         private readonly ILogger<HomeController> log;
         NationalParksData db;
-
-        public SearchController(ILogger<HomeController> logger, NationalParksData dbContext)
+        DataLoader api;
+        ChartResponse chartResp;
+        public SearchController(ILogger<HomeController> logger, NationalParksData dbContext, DataLoader loader)
         {
             log = logger;
-            db = dbContext;           
+            db = dbContext;
+            api = loader;
+            //Load Search page chart data from teh API into memory
+            chartResp = loader.chartRespData;
 
         }
 
         public IActionResult Search()
         {
             log.LogInformation("In search method...");
-            SearchViewModel SearchModel = new SearchViewModel();
+            SearchViewModel SearchModel = new SearchViewModel();           
+
             //Instantiate dropdowns
             SearchModel.states = db.ParkState.Select(parkSt => parkSt.StateCode).Distinct().ToList();
             SearchModel.parkCodes = db.Park.Select(park => new ParksAndCodes
@@ -83,6 +91,30 @@ namespace Assignment4.Controllers
             return new JsonResult(response);
 
         }
+
+        [HttpPost]
+        public JsonResult FindCampgrounds([FromBody] string parkCode)
+        {
+            log.LogInformation($"In FindCampgrounds method... parkCode: {parkCode}");
+
+            List<Campground> camps = db.Campground.Where(camp => camp.ParkCode.Equals(parkCode)).ToList();
+            return new JsonResult(camps);
+
+        }
+
+
+        [HttpPost]
+        public JsonResult GetChartData()
+        {
+            log.LogInformation("In GetChartData method...");
+
+            return new JsonResult(chartResp);
+
+        }
+
+        
+
+
 
 
     }

@@ -1,25 +1,6 @@
 var searchForm = {};
 var params = {};
-$(document).ready(function () {
-	searchForm = $("#wider_reservation_form");
-	var urlParamsStr = window.location.href.split('?')[1];
-	$(".no_results").hide();	
-	if (urlParamsStr === undefined) {
-		console.log("URL is not defined");
-		searchForm.hide();
-	} else {
-		urlParamsStr.split("&").forEach(keyPair => {
-			var pair = keyPair.split("=");
-			params[pair[0]] = pair[1];
-		})
-		$("#intro").text("Please enter all the details below to make reservation for the campground you selected to stay at:");
-		$("#park_name").text(`Park Name: ${params.parkName.replaceAll("%20", " ")}`);
-		$("#camp_name").text(`Campground: ${params.campName.replaceAll("%20", " ")}`);
-		$("#wider_reservation_search").hide();
-		$(".reservation_control_buttons").hide();
-		console.log("URL params: " + JSON.stringify(params));
-	}
- });
+
 $(document).on('click','#find_reservation',function(){
 	console.log("Here");
 	$(".no_results").hide();

@@ -1,6 +1,6 @@
 
 async function callApi(uri, data) {
-	console.log(`Calling uri ${uri} with data ${JSON.stringify(data)}`);
+	//console.log(`Calling uri ${uri} with data ${JSON.stringify(data)}`);
 	const result = await $.ajax({
 		url: uri,
 		type: "POST",
@@ -14,7 +14,6 @@ async function callApi(uri, data) {
 	return result;
 }
 
-
 $(document).on('click', '#search_click', function () {	
 	var parkSearchInfo = {};
 	parkSearchInfo.description = $("#park_name").val().trim();
@@ -22,7 +21,7 @@ $(document).on('click', '#search_click', function () {
 	parkSearchInfo.parkCode = $("#park_code").val();
 	if (parkSearchInfo.description != "" || parkSearchInfo.state != "" || parkSearchInfo.parkCode != "") {
 		callApi('/Search/FindParks', parkSearchInfo).then(json => {
-			console.log("Result fetched: " + JSON.stringify(json));
+			//console.log("Result fetched: " + JSON.stringify(json));
 			displayResults(json);
 		});
 	}
@@ -30,58 +29,20 @@ $(document).on('click', '#search_click', function () {
 	
 });
 
-
 $(document).on('click','#check_avail_button',function(){
 	var parkCode = $(this).attr("value");
 	if (parkCode !== undefined && parkCode != '') {
-		var query = `campgrounds?parkCode=${parkCode}`;
-		execQuery(query, 'campSearch', parkCode);
+		callApi('/Search/FindCampgrounds', parkCode).then(json => {
+			//console.log("Result fetched: " + JSON.stringify(json));
+			displayCampgrounds(json, parkCode)
+		});
 	}	
 	
 });
 
-$(document).on('click','#reserve_button',function(){
-	var parkCampIds = $(this).attr("value");
-	var ids = parkCampIds.split("___");
-	var parkId = ids[0];
-	var campId = ids[1];
-	var parkName = $("#"+parkId).text();
-	var campName = $("#"+campId).text();	
-	var urlParams = `?parkId=${parkId}&campId=${campId}&parkName=${parkName}&campName=${campName}`;
-	window.location.replace(`Reservations.html${urlParams}`);
-	
-	
-	
-});
-
-
-function execQuery(query, type, parkCode) {
-	let endpoint = 'https://developer.nps.gov/api/v1/';
-	let apiKey = 'Xui3j5YQKjKLv7a5gqDYxeWdkMft7k9xdtduFSgt';
-	$.ajaxSetup({
-		headers: { 'X-Api-Key': apiKey }
-	});
-
-	$.ajax({		
-        url: endpoint + query,		
-        contentType: "application/json",
-        dataType: 'json',
-		success: function(result) { 
-			if ('parkSearch' == type) {
-				displayResults(result) 
-			} else if ('campSearch' == type) {
-				displayCampgrounds(result, parkCode);
-			}
-		},
-		error: function() {
-			console.log("error!");
-		}
-    })  
-}
-
 function displayCampgrounds(results, parkCode) {
 	var pName = `#park_${parkCode}`;
-	console.log(results);
+	//console.log(results);
 	var campgroundTable = getCampsTable(results);
 	if (campgroundTable !== undefined && campgroundTable != '') {
 		var paragraph = $(pName);
@@ -149,11 +110,11 @@ function getFeesTbl(park) {
 
 function getCampsTable(results) {
 	var campTbl = '';
-	if (results !== undefined && results.total != 0) {
-		results.data.forEach(camp => {
-			campTbl = campTbl + `<li><p id="${camp.id}"><b>${camp.name}</b></p><p>Total Available: ${camp.campsites.totalSites}</p><p>${camp.description}</p>`;
-			if (camp.reservationUrl != "") {
-				 campTbl = campTbl + `<p><button id="reserve_button" class = "camp_button" value=${camp.parkCode + "___" + camp.id}>Reserve</button></p></li>`;
+	if (results !== undefined && results.length > 0) {
+		results.forEach(camp => {
+			campTbl = campTbl + `<li><p id="${camp.campgroundId}"><b>${camp.campgroundName}</b></p><p>Total Available: ${camp.sites}</p><p>${camp.campgroundDescription}</p>`;
+			if (camp.reservable == true) {
+				campTbl = campTbl + `<p><form action="/Reservation/Reserve" method="GET"><input type="hidden" name="ids" value="${camp.parkCode + "___" + camp.campgroundId}" /><button type="submit" id="reserve_button" class = "camp_button">Reserve</button></form></p></li>`;
 			} else {
 				campTbl = campTbl + `<p class="no_results">This campground is not reservable</p>`;
 			}
@@ -165,6 +126,47 @@ function getCampsTable(results) {
 		campTbl = '<p class="no_results"> No Campgrounds Found!</p>';
 	}
 	return campTbl;
+}
+
+$(document).ready(function () {
+	callApi('/Search/GetChartData').then(json => {
+		console.log("Chart Result fetched: " + JSON.stringify(json));
+		createChart(json);
+	});
+
+});
+
+function createChart(json) {
+	console.log("Start creating chart");
+	var ctx = document.getElementById('chart').getContext('2d');
+
+	var chart = new Chart(ctx, {
+		type: 'doughnut',
+		data: {
+			labels: json.labels,
+			fontColor: 'black',
+			datasets: [
+				{
+					label: "Number Of Parks",
+					backgroundColor: json.colors,
+					data: json.data,
+					fontColor: 'black'
+				}
+			]
+		},
+		options: {
+			legend: {
+				display: true,
+				fontColor: 'black'
+			},
+			title: {
+				display: true,
+				fontSize: 16,
+				text: 'State Share of National Parks - (Hover over the chart to see how many parks each state offers)',
+				fontColor: 'black'
+			},
+		}
+	});
 }
 
 

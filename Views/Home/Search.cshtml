@@ -7,6 +7,7 @@
 @section custom_js_css {
     <link href="/CSS/FormStyles.css" rel="stylesheet" type="text/css">
     <script src="/js/Search.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 }
 
 
@@ -17,35 +18,38 @@
     <p id="intro">If you want to modify your existing reservation please go to our <a href="Reservations.html">Reservations</a> page.</p>
 
 
-        <div class="search_park_form_div">
-            <div class="form_lines">
-                <label>Description:</label> <input type="search" id="park_name" class="field-long" />
-            </div>
-            <div class="form_lines">
-                <label>State: </label>
-                <select name="states" id="park_state" class="field-long">
-                    <option value="" text="" />
-                    @foreach (string state in @Model.states)
-                    {
-                        <option value="@state">@state</option>
-                    }
-                </select>
-            </div>
-            <div class="form_lines">
-                <label>Park Name: </label>
-                <select name="park_codes" id="park_code" class="field-long">
-                    <option value="" text="" />
-                    @foreach (ParksAndCodes parksAndCodes in @Model.parkCodes)
-                    {
-                        <option value="@parksAndCodes.parkCode">@parksAndCodes.parkName</option>
-                    }
-                </select>
-            </div>
-            <div class="form_lines"><button id="search_click" type="submit">Search</button></div>
+    <div class="search_park_form_div">
+        <div class="form_lines">
+            <label>Description:</label> <input type="search" id="park_name" class="field-long" />
         </div>
+        <div class="form_lines">
+            <label>State: </label>
+            <select name="states" id="park_state" class="field-long">
+                <option value="" text="" />
+                @foreach (string state in @Model.states)
+                {
+                    <option value="@state">@state</option>
+                }
+            </select>
+        </div>
+        <div class="form_lines">
+            <label>Park Name: </label>
+            <select name="park_codes" id="park_code" class="field-long">
+                <option value="" text="" />
+                @foreach (ParksAndCodes parksAndCodes in @Model.parkCodes)
+                {
+                    <option value="@parksAndCodes.parkCode">@parksAndCodes.parkName</option>
+                }
+            </select>
+        </div>
+        <div class="form_lines"><button id="search_click" type="submit">Search</button></div>
+    </div>
 
     <div class="results">
         <div class="output">
         </div>
     </div>
+
+    <canvas id="chart" width="150" height="50"></canvas>
+
 </div>

@@ -19,7 +19,7 @@ $.ajax({
 		sliderData.descr = "Entrace Sign for the Everglades National Park";
 		sliderData.url = "Images/Banner/1.jpg";
 		imgs.push(sliderData);	
-		console.log(`result: ${JSON.stringify(result)}`);
+		//console.log(`result: ${JSON.stringify(result)}`);
 		result.forEach(rec => {			
 			rec.images.forEach(img => {
 				var sliderData = {};		

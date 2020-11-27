@@ -102,9 +102,9 @@ namespace Assignment4.DBModel
         public string CampgroundDescription { get; set; }
         public int MaxReservation { get; set; }
         public int Sites { get; set; }
+        public Boolean reservable { get; set; }
 
         public List<Reservation> Reservations;
-
         public virtual Park park { get; set; }
 
     }
