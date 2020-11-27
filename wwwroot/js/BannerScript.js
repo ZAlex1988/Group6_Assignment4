@@ -1,20 +1,16 @@
 var imgs = [];
-var endpoint = 'https://developer.nps.gov/api/v1/';
-var apiKey = 'Xui3j5YQKjKLv7a5gqDYxeWdkMft7k9xdtduFSgt';
 var imageCount = 0;
 var total = 0;
 var time = window.setInterval(autoRotate, 6000);
-	
-console.log("Here");
+
+var parkCodes = ["glac", "acad", "ever"];
 
 
-$.ajaxSetup({
-	headers: { 'X-Api-Key': apiKey }
-});
-	
 $.ajax({
-	url: endpoint + "parks?parkCode=arch,glac,ever",		
-	contentType: "application/json",
+	url: "/Home/GetImageUrls",
+	type: "POST",
+	data: JSON.stringify(parkCodes),
+	contentType: 'application/json; charset=utf-8',
 	dataType: 'json',
 	success: function(result){	
 		//manually add default image
@@ -23,13 +19,13 @@ $.ajax({
 		sliderData.descr = "Entrace Sign for the Everglades National Park";
 		sliderData.url = "Images/Banner/1.jpg";
 		imgs.push(sliderData);	
-	
-		result.data.forEach(rec => {			
+		//console.log(`result: ${JSON.stringify(result)}`);
+		result.forEach(rec => {			
 			rec.images.forEach(img => {
 				var sliderData = {};		
 				sliderData.park = rec.fullName;
 				sliderData.descr = img.title + "." + img.caption;
-				sliderData.url = img.url;
+				sliderData.url = img.imageUrl;
 				imgs.push(sliderData);
 			})
 			

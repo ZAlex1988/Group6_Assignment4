@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Assignment4.Models;
 using Assignment4.Services;
+using Assignment4.DataAccess;
+using Assignment4.DBModel;
 
 namespace Assignment4.Controllers
 {
@@ -14,22 +16,22 @@ namespace Assignment4.Controllers
     {
         private readonly ILogger<HomeController> log;
         DataLoader Loader;
+        NationalParksData db;
 
-        public HomeController(ILogger<HomeController> logger, DataLoader DataLoader)
+        public HomeController(ILogger<HomeController> logger, DataLoader DataLoader, NationalParksData dbContext)
         {
             Loader = DataLoader;
             log = logger;
+            db = dbContext;
         }
 
         public IActionResult Index()
         {
-            if (Loader != null)
-            {
-                log.LogInformation("Data loader is not NULL! :)");
+            if (Loader != null && db.Park.Count() == 0) {
                 Loader.createAllNationalParksDB();
             } else
             {
-                log.LogInformation("Data loader is NULL! :'(");
+                log.LogInformation("Data loader is NULL!");
             }
             return View();
         }
@@ -50,16 +52,22 @@ namespace Assignment4.Controllers
             return View();
         }
 
-        public IActionResult Reservations()
+
+        [HttpPost]
+        public JsonResult GetImageUrls([FromBody] string [] parkCodes)
         {
+            log.LogInformation($"GetImageUrls({parkCodes.Length})");
+            List<ImageUrlsResp> response = new List<ImageUrlsResp>();
+            parkCodes.ToList().ForEach(code =>
+            {
+                ImageUrlsResp resp = new ImageUrlsResp();
+                Park park = db.Park.Where(p => p.ParkCode.Equals(code)).FirstOrDefault();
+                resp.fullName = park.ParkName;
+                resp.images = db.ParkImages.Where(img => img.ParkCode.Equals(code)).ToList();
+                response.Add(resp);
+            });
 
-            return View();
-        }
-
-        public IActionResult Search()
-        {
-
-            return View();
+            return new JsonResult(response);
         }
     }
 }

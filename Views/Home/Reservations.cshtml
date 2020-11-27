@@ -7,330 +7,362 @@
     <script src="/js/Reservation.js"></script>
 }
 
+@model ReservationsViewModel
 
 <div class="bodycont">
     <h1 align="center">National Park Campground Reservation</h1>
-    <p id="intro">Please go to <a href="Search.html">Search</a> page to find the campground you would like to reserve. To modify existing reservation please enter your reservation ID below.</p>
-    <div class="search_park_form_div" id="wider_reservation_search">
-        <div class="search_reservation">
-            <label>Reservation ID: </label>
-            <input class="field-short" id="reservationNum" type="search" value="123" />
-            <button id="find_reservation">Search</button>
+    @if (Model.Reservations == null && Model.reserveRequest == null)
+    {
+        <p id="intro">Please go to <a href="Search.html">Search</a> page to find the campground you would like to reserve. To modify existing reservation please enter your reservation ID below.</p>
+    }
+    else
+    {
+        <p id="intro">Please enter all the details below to make reservation for the campground you selected to stay at: </p>
+    }
+
+    @if (Model.reserveRequest == null)
+    {
+        <div class="search_park_form_div" id="wider_reservation_search">
+
+            <div class="search_reservation">
+                <label>Reservation ID: </label>
+                <input class="field-short" id="reservationNum" type="search" value="123" />
+                <button id="find_reservation">Search</button>
+            </div>
         </div>
-    </div>
-    <div><p id="intro" class="no_results">Reservation Not Found! Please enter valid reservation number (123)</p></div>
-    <div class="search_park_form_div" id="wider_reservation_form">
-        <table width="100%" cellpadding="0" cellspacing="0">
-            <tr valign="top">
+    }
+    @if (Model.noResults)
+    {
+        <div>
+            <p id="intro" class="no_results">Reservation Not Found! Please enter valid reservation number (123)</p>
+        </div>
+    }
+    @if (Model.reserveRequest != null || Model.Reservations != null)
+    {
+        <div class="search_park_form_div" id="wider_reservation_form">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr valign="top">
 
-                <td style="padding: 15px;">
-                    <!-- Left, wider white column -->
+                    <td style="padding: 15px;">
+                        <!-- Left, wider white column -->
 
-                    <h2 class="treb-blue-150" style="margin: 0 0 1px 0;">
-                        Online Reservation Form
-                    </h2>
-                    <br>
-                    <table cellpadding=10 cellspacing=3 border=2>
-                        <tr>
-                            <td>
-                                <div class="reservation_control_buttons">
-                                    <button id="update_reservation">Update</button>
-                                    <button id="delete_reservation">Delete</button>
-                                </div>
-                                <font size="3" face="Arial">
-                                    <b>Reserve your site now by filling out the form below:</b>
-                                </font>
+                        <h2 class="treb-blue-150" style="margin: 0 0 1px 0;">
+                            Online Reservation Form
+                        </h2>
+                        <br>
+                        <table cellpadding=10 cellspacing=3 border=2>
+                            <tr>
+                                <td>
+                                    @if (Model.reserveRequest == null)
+                                    {
+                                        <div class="reservation_control_buttons">
+                                            <button id="update_reservation">Update</button>
+                                            <button id="delete_reservation">Delete</button>
+                                        </div>
+                                    }
+                                        <font size="3" face="Arial">
+                                            <b>Reserve your site now by filling out the form below:</b>
+                                        </font>
 
-                                <form method="post" action="Thankyou.html">
-                                    <input type=hidden name="recipient" value="youraddress@yourdomain.com">
-                                    <input type=hidden name="subject" value="Reservation Form Submission">
-                                    <input type=hidden name="redirect" value="thankyou.html">
-                                    <div class="reservation_params_frame">
-                                        <label id="park_name">Park Name:</label><br>
-                                        <label id="camp_name">Campground:</label>
-                                    </div>
+                                        <form method="post" action="Thankyou.html">
+                                            <input type=hidden name="recipient" value="youraddress@yourdomain.com">
+                                            <input type=hidden name="subject" value="Reservation Form Submission">
+                                            <input type=hidden name="redirect" value="thankyou.html">
+                                            <div class="reservation_params_frame">
+                                                @if (Model.reserveRequest == null)
+                                                {
+                                                    <label id="park_name">Park Name:</label><br>
+                                                    <label id="camp_name">Campground:</label>
+                                                }
+                                                else
+                                                {
+                                                    <label id="park_name">Park Name: @Model.reserveRequest.parkName</label><br>
+                                                    <label id="camp_name">Campground: @Model.reserveRequest.campName</label>
+                                                }
+                                            </div>
 
-                                    <table border=0 width=450>
+                                            <table border=0 width=450>
 
-                                        <tr><td>First Name(s):</td><td colspan=2> <input type="text" name="Cust_First_Names" size=30></td></tr>
-                                        <tr><td>Last Name:</td><td colspan=2> <input type="text" name="Cust_Last_Name" size=30></td></tr>
-                                        <tr><td>Street Address:</td><td colspan=2> <input type="text" name="Cust_Address_1" size=42></td></tr>
-                                        <tr><td>&nbsp; &nbsp; &nbsp; &nbsp; (continued):</td><td colspan=2> <input type="text" name="Cust_Address_2" size=42></td></tr>
+                                                <tr><td>First Name(s):</td><td colspan=2> <input type="text" name="Cust_First_Names" size=30></td></tr>
+                                                <tr><td>Last Name:</td><td colspan=2> <input type="text" name="Cust_Last_Name" size=30></td></tr>
+                                                <tr><td>Street Address:</td><td colspan=2> <input type="text" name="Cust_Address_1" size=42></td></tr>
+                                                <tr><td>&nbsp; &nbsp; &nbsp; &nbsp; (continued):</td><td colspan=2> <input type="text" name="Cust_Address_2" size=42></td></tr>
 
-                                        <tr>
-                                            <td>City:<br> <input type="text" name="Cust_City" size=20></td>&nbsp;
-                                            <td>State/Province:<br> <input type="text" name="Cust_State" size=5></td>&nbsp;
-                                            <td>Zip/Postal Code:<br> <input type="text" name="Cust_Zip" size=10></td>
+                                                <tr>
+                                                    <td>City:<br> <input type="text" name="Cust_City" size=20></td>&nbsp;
+                                                    <td>State/Province:<br> <input type="text" name="Cust_State" size=5></td>&nbsp;
+                                                    <td>Zip/Postal Code:<br> <input type="text" name="Cust_Zip" size=10></td>
 
-                                        </tr>
-                                        <tr>
-                                            <td>Country: </td>
-                                            <td colspan=2><input type="text" name="Cust_Country" size=15> (if non-U.S.)</td>
-                                        </tr>
+                                                </tr>
+                                                <tr>
+                                                    <td>Country: </td>
+                                                    <td colspan=2><input type="text" name="Cust_Country" size=15> (if non-U.S.)</td>
+                                                </tr>
 
-                                        <tr><td>Home Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_1" size=14></td></tr>
-                                        <tr><td>Work Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_2" size=14></td></tr>
-                                        <tr><td>Cell Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_3" size=14></td></tr>
-                                        <tr><td>Email Address: </td><td colspan=2> <input type="text" name="Cust_Email" size=25></td></tr>
+                                                <tr><td>Home Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_1" size=14></td></tr>
+                                                <tr><td>Work Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_2" size=14></td></tr>
+                                                <tr><td>Cell Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_3" size=14></td></tr>
+                                                <tr><td>Email Address: </td><td colspan=2> <input type="text" name="Cust_Email" size=25></td></tr>
 
-                                        <tr>
-                                            <td>Type of Camper: </td>
-                                            <td colspan=2>
-                                                <select name="Rig_Type">
-                                                    <option value="Diesel MH">Diesel Class A Motorhome</option>
-                                                    <option value="Class A MH">Gasoline Class A Motorhome</option>
-                                                    <option value="Class C MH">Class C Motorhome</option>
-                                                    <option value="Class B MH">Van or Class B Motorhome</option>
-                                                    <option value="Truck Camper">Truck Camper</option>
-                                                    <option value="Fifth Wheel">Fifth Wheel</option>
-                                                    <option value="Trailer">Travel Trailer</option>
-                                                    <option value="Popup">Pop-Up Trailer</option>
-                                                    <option value="Tent">Tent</option>
-                                                    <option value="None">None</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                                <tr>
+                                                    <td>Type of Camper: </td>
+                                                    <td colspan=2>
+                                                        <select name="Rig_Type">
+                                                            <option value="Diesel MH">Diesel Class A Motorhome</option>
+                                                            <option value="Class A MH">Gasoline Class A Motorhome</option>
+                                                            <option value="Class C MH">Class C Motorhome</option>
+                                                            <option value="Class B MH">Van or Class B Motorhome</option>
+                                                            <option value="Truck Camper">Truck Camper</option>
+                                                            <option value="Fifth Wheel">Fifth Wheel</option>
+                                                            <option value="Trailer">Travel Trailer</option>
+                                                            <option value="Popup">Pop-Up Trailer</option>
+                                                            <option value="Tent">Tent</option>
+                                                            <option value="None">None</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
 
-                                        <tr><td>Length of Camper: </td><td colspan=2>  <input type="text" name="Rig_Length" size=2>Feet</td></tr>
-                                    </table>
+                                                <tr><td>Length of Camper: </td><td colspan=2>  <input type="text" name="Rig_Length" size=2>Feet</td></tr>
+                                            </table>
 
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                Number of Adults?  <select name="Num_Adults">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                </select>
-                                                Children?  <select name="Num_Children">
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                </select><br>
-                                                Number of Pets?  <select name="Num_Pets">
-                                                    <option value="0">0</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                                Description of pets:  <input type="text" name="Pets_Desc" size=14>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        Number of Adults?  <select name="Num_Adults">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                        Children?  <select name="Num_Children">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select><br>
+                                                        Number of Pets?  <select name="Num_Pets">
+                                                            <option value="0">0</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                        </select>
+                                                        Description of pets:  <input type="text" name="Pets_Desc" size=14>
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                    <table>
-                                        <tr>
+                                            <table>
+                                                <tr>
 
-                                            <td>
-                                                <br>
-                                                <b>Site Requirements:</b>
-                                                <br>
-                                                <br>
-                                                Number of sites: <input type="text" size=3 name="Num_Sites">
-                                                <br>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Type of site or accomodation:
-                                            </td>
-                                            <td>
-                                                <select name="Site_Type">
-                                                    <option value="Normal RV">Normal RV Site</option>
-                                                    <option value="Deluxe RV">Deluxe RV Site</option>
-                                                    <option value="Drycamp">Dry camping area</option>
-                                                    <option value="Tent">Tent Site</option>
-                                                    <option value="Cabin">Cabin</option>
-                                                    <option value="Room">Motel Room</option>
-                                                    <option value="Pavilion">Pavilion rental</option>
-                                                </select> &nbsp; &nbsp;
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <input type="checkbox" name="Attrib_Full-Hook-up">Full Hook-Up
-                                                <br><input type="checkbox" name="Attrib_50A">50 Amp Electric
-                                                <br><input type="checkbox" name="Attrib_Pullthru">Pull-Thru
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan=2>
-                                                Preferred Site(s):
-                                                <input type="text" size=30 name="Site_Name">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                                    <td>
+                                                        <br>
+                                                        <b>Site Requirements:</b>
+                                                        <br>
+                                                        <br>
+                                                        Number of sites: <input type="text" size=3 name="Num_Sites">
+                                                        <br>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Type of site or accomodation:
+                                                    </td>
+                                                    <td>
+                                                        <select name="Site_Type">
+                                                            <option value="Normal RV">Normal RV Site</option>
+                                                            <option value="Deluxe RV">Deluxe RV Site</option>
+                                                            <option value="Drycamp">Dry camping area</option>
+                                                            <option value="Tent">Tent Site</option>
+                                                            <option value="Cabin">Cabin</option>
+                                                            <option value="Room">Motel Room</option>
+                                                            <option value="Pavilion">Pavilion rental</option>
+                                                        </select> &nbsp; &nbsp;
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <input type="checkbox" name="Attrib_Full-Hook-up">Full Hook-Up
+                                                        <br><input type="checkbox" name="Attrib_50A">50 Amp Electric
+                                                        <br><input type="checkbox" name="Attrib_Pullthru">Pull-Thru
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan=2>
+                                                        Preferred Site(s):
+                                                        <input type="text" size=30 name="Site_Name">
+                                                    </td>
+                                                </tr>
+                                            </table>
 
-                                    <table>
-                                        <tr>
-                                            <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
 
-                                                <br><b>Dates Requested:</b>
-                                                <br>&nbsp;
-
-
-                                                <br>First Night:
-                                                <select name="Resv_First_Date">
-                                                    <option Value="Select Month">Select Month</option>
-                                                    <option value="1">January</option>
-                                                    <option value="2">February</option>
-                                                    <option value="3">March</option>
-                                                    <option value="4">April</option>
-                                                    <option value="5">May</option>
-                                                    <option value="6">June</option>
-                                                    <option value="7">July</option>
-                                                    <option value="8">August</option>
-                                                    <option value="9">September</option>
-                                                    <option value="10">October</option>
-                                                    <option value="11">November</option>
-                                                    <option value="12">December</option>
-                                                </select>
-                                                <select name="First_Date2">
-                                                    <option value="Day">Day</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    <option value="6">6</option>
-                                                    <option value="7">7</option>
-                                                    <option value="8">8</option>
-                                                    <option value="9">9</option>
-                                                    <option value="10">10</option>
-                                                    <option value="11">11</option>
-                                                    <option value="12">12</option>
-                                                    <option value="13">13</option>
-                                                    <option value="14">14</option>
-                                                    <option value="15">15</option>
-                                                    <option value="16">16</option>
-                                                    <option value="17">17</option>
-                                                    <option value="18">18</option>
-                                                    <option value="19">19</option>
-                                                    <option value="20">20</option>
-                                                    <option value="21">21</option>
-                                                    <option value="22">22</option>
-                                                    <option value="23">23</option>
-                                                    <option value="24">24</option>
-                                                    <option value="25">25</option>
-                                                    <option value="26">26</option>
-                                                    <option value="27">27</option>
-                                                    <option value="28">28</option>
-                                                    <option value="29">29</option>
-                                                    <option value="30">30</option>
-                                                    <option value="31">31</option>
-                                                </select>
-                                                <select name="First_Date3">
-                                                    <option value="2020">2020</option>
-                                                    <option value="2021">2021</option>
-                                                    <option value="2022">2022</option>
-                                                    <option value="2023">2023</option>
-                                                    <option value="2024">2024</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                                        <br><b>Dates Requested:</b>
+                                                        <br>&nbsp;
 
 
-                                        <tr>
-                                            <td>
-                                                Estimated arrival time:
-                                                <select name="Est_Time">
-                                                    <option value="10 AM">10 AM</option>
-                                                    <option value="11 AM">11 </option>
-                                                    <option value="12 PM">12 PM</option>
-                                                    <option value="1 PM">1 PM</option>
-                                                    <option value="2 PM">2 PM</option>
-                                                    <option value="3 PM">3 PM</option>
-                                                    <option value="4 PM">4 PM</option>
-                                                    <option value="5 PM">5 PM</option>
-                                                    <option value="6 PM">6 PM</option>
-                                                    <option value="7 PM">7 PM</option>
-                                                    <option value="8 PM">8 PM</option>
-                                                    <option value="9 PM">9 PM</option>
-                                                    <option value="10PM">10 PM</option>
-                                                    <option value="11PM">11 PM</option>
-                                                    <option value="12AM">12 AM</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                                        <br>First Night:
+                                                        <select name="Resv_First_Date">
+                                                            <option Value="Select Month">Select Month</option>
+                                                            <option value="1">January</option>
+                                                            <option value="2">February</option>
+                                                            <option value="3">March</option>
+                                                            <option value="4">April</option>
+                                                            <option value="5">May</option>
+                                                            <option value="6">June</option>
+                                                            <option value="7">July</option>
+                                                            <option value="8">August</option>
+                                                            <option value="9">September</option>
+                                                            <option value="10">October</option>
+                                                            <option value="11">November</option>
+                                                            <option value="12">December</option>
+                                                        </select>
+                                                        <select name="First_Date2">
+                                                            <option value="Day">Day</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                            <option value="13">13</option>
+                                                            <option value="14">14</option>
+                                                            <option value="15">15</option>
+                                                            <option value="16">16</option>
+                                                            <option value="17">17</option>
+                                                            <option value="18">18</option>
+                                                            <option value="19">19</option>
+                                                            <option value="20">20</option>
+                                                            <option value="21">21</option>
+                                                            <option value="22">22</option>
+                                                            <option value="23">23</option>
+                                                            <option value="24">24</option>
+                                                            <option value="25">25</option>
+                                                            <option value="26">26</option>
+                                                            <option value="27">27</option>
+                                                            <option value="28">28</option>
+                                                            <option value="29">29</option>
+                                                            <option value="30">30</option>
+                                                            <option value="31">31</option>
+                                                        </select>
+                                                        <select name="First_Date3">
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021">2021</option>
+                                                            <option value="2022">2022</option>
+                                                            <option value="2023">2023</option>
+                                                            <option value="2024">2024</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
 
-                                        <tr>
-                                            <td>
-                                                Number of nights: <input type="text" name="Num_Nights" size=4>
-                                            </td>
-                                        </tr>
 
-                                        <tr>
-                                            <td>
-                                                <br>How were you referred?  <select name="How_Found">
-                                                    <option value="Return visit">I've been here before</option>
-                                                    <option value="Friend">A Friend</option>
-                                                    <option value="Woodall's">Woodall's directory</option>
-                                                    <option value="Trailer Life">Trailer Life directory</option>
-                                                    <option value="Escapees">Escapees Directory</option>
-                                                    <option value="Coast/Coast">Coast to Coast</option>
-                                                    <option value="Passport Am.">Passport America</option>
-                                                    <option value="RPI">RPI directory</option>
-                                                    <option value="Other Guide">Other Camping Directory</option>
-                                                    <option value="Trailer Life Mag">Trailer Life Magazine</option>
-                                                    <option value="Motor Home">Motor Home Magazine</option>
-                                                    <option value="FMCA Mag">FMCA Magazine</option>
-                                                    <option value="Highways Mag">Highways Magazine</option>
-                                                    <option value="Camping Life">Camping Life Magazine</option>
-                                                    <option value="RV Companion">RV Companion Magazine</option>
-                                                    <option value="Magazine">Other Magazine</option>
-                                                    <option value="Phone book">Phone book</option>
-                                                    <option value="Internet">Internet</option>
-                                                    <option value="Signs">Highway Sign</option>
-                                                    <option value="Drove By">Drove By</option>
-                                                    <option value="AAA">AAA Auto club</option>
-                                                    <option value="Rally">RV Rally</option>
-                                                    <option value="Sports show">Sports show</option>
-                                                    <option value="Brochure">Brochure</option>
-                                                    <option value="Flyer">Flyer</option>
-                                                    <option value="TV">Television</option>
-                                                    <option value="Radio">Radio</option>
-                                                    <option value="Mail">Direct Mail</option>
-                                                    <option value="Chamber/Comm">Chamber of Commerce</option>
-                                                    <option value="Travel Info Ctr">Travel Information Center</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </td>
-                                        </tr>
+                                                <tr>
+                                                    <td>
+                                                        Estimated arrival time:
+                                                        <select name="Est_Time">
+                                                            <option value="10 AM">10 AM</option>
+                                                            <option value="11 AM">11 </option>
+                                                            <option value="12 PM">12 PM</option>
+                                                            <option value="1 PM">1 PM</option>
+                                                            <option value="2 PM">2 PM</option>
+                                                            <option value="3 PM">3 PM</option>
+                                                            <option value="4 PM">4 PM</option>
+                                                            <option value="5 PM">5 PM</option>
+                                                            <option value="6 PM">6 PM</option>
+                                                            <option value="7 PM">7 PM</option>
+                                                            <option value="8 PM">8 PM</option>
+                                                            <option value="9 PM">9 PM</option>
+                                                            <option value="10PM">10 PM</option>
+                                                            <option value="11PM">11 PM</option>
+                                                            <option value="12AM">12 AM</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
 
-                                        <tr><td>&nbsp;</td></tr>
-                                        <tr>
-                                            <td>
-                                                Special Needs or Comments:
-                                                <br><textarea NAME="Resv_Notes" ROWS=7 COLS=36></textarea>
-                                            </td>
-                                        </tr>
-                                        <tr><td>&nbsp;</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        Number of nights: <input type="text" name="Num_Nights" size=4>
+                                                    </td>
+                                                </tr>
 
-                                    </table>
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                                                <tr>
+                                                    <td>
+                                                        <br>How were you referred?  <select name="How_Found">
+                                                            <option value="Return visit">I've been here before</option>
+                                                            <option value="Friend">A Friend</option>
+                                                            <option value="Woodall's">Woodall's directory</option>
+                                                            <option value="Trailer Life">Trailer Life directory</option>
+                                                            <option value="Escapees">Escapees Directory</option>
+                                                            <option value="Coast/Coast">Coast to Coast</option>
+                                                            <option value="Passport Am.">Passport America</option>
+                                                            <option value="RPI">RPI directory</option>
+                                                            <option value="Other Guide">Other Camping Directory</option>
+                                                            <option value="Trailer Life Mag">Trailer Life Magazine</option>
+                                                            <option value="Motor Home">Motor Home Magazine</option>
+                                                            <option value="FMCA Mag">FMCA Magazine</option>
+                                                            <option value="Highways Mag">Highways Magazine</option>
+                                                            <option value="Camping Life">Camping Life Magazine</option>
+                                                            <option value="RV Companion">RV Companion Magazine</option>
+                                                            <option value="Magazine">Other Magazine</option>
+                                                            <option value="Phone book">Phone book</option>
+                                                            <option value="Internet">Internet</option>
+                                                            <option value="Signs">Highway Sign</option>
+                                                            <option value="Drove By">Drove By</option>
+                                                            <option value="AAA">AAA Auto club</option>
+                                                            <option value="Rally">RV Rally</option>
+                                                            <option value="Sports show">Sports show</option>
+                                                            <option value="Brochure">Brochure</option>
+                                                            <option value="Flyer">Flyer</option>
+                                                            <option value="TV">Television</option>
+                                                            <option value="Radio">Radio</option>
+                                                            <option value="Mail">Direct Mail</option>
+                                                            <option value="Chamber/Comm">Chamber of Commerce</option>
+                                                            <option value="Travel Info Ctr">Travel Information Center</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
 
-        <div class="form_lines">
-            <input type="submit" id="search_click_button" />
+                                                <tr><td>&nbsp;</td></tr>
+                                                <tr>
+                                                    <td>
+                                                        Special Needs or Comments:
+                                                        <br><textarea NAME="Resv_Notes" ROWS=7 COLS=36></textarea>
+                                                    </td>
+                                                </tr>
+                                                <tr><td>&nbsp;</td></tr>
+
+                                            </table>
+                                        </form>
+                                    </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="form_lines">
+                <input type="submit" id="search_click_button" />
+
+            </div>
+
 
         </div>
-
-
+    }
     </div>
-</div>
 
 

@@ -28,7 +28,7 @@ namespace Assignment4
         {
             services.AddDbContext<NationalParksData>(options => options.UseSqlServer(Configuration["Data:NationalParksData:ConnectionString"]));
             services.AddControllersWithViews();
-            services.AddTransient<DataLoader>();
+            services.AddSingleton<DataLoader>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
