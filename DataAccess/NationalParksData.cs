@@ -24,7 +24,8 @@ namespace Assignment4.DataAccess
         public DbSet<Reservation> Reservation { get; set; }
 
         public DbSet<ParkState> ParkState { get; set; }
-
+        public DbSet<ParkImages> ParkImages { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ParkActivity>().HasKey(vf => new { vf.ParkCode, vf.ActivityId });

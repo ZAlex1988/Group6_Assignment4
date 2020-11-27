@@ -13,23 +13,27 @@ namespace Assignment4.DBModel
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ActivityId { get; set; }
         public string ActivityName { get; set; }
-        public List<ParkActivity> ParkActivities;
+        public List<ParkActivity> ParkActivity;
     }
 
     public class Park
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public string ParkCode { get; set; }
         public string ParkName { get; set; }
         public string ParkDescription { get; set; }
 
-        public List<ParkActivity> ParkActivities;
+        public string ParkUrl { get; set; }
 
-        public List<Fee> Fees;
+        public List<ParkActivity> ParkActivity;
 
-        public List<Campground> Campgrounds;
+        public List<Fee> Fee;
 
-        public List<ParkState> ParkStates;
+        public List<Campground> Campground;
+
+        public List<ParkState> ParkState;
+
+        public List<ParkImages> ParkImages;
     }
 
     public class ParkActivity
@@ -41,6 +45,8 @@ namespace Assignment4.DBModel
         [Key]
         [ForeignKey("Activity")]
         public string ActivityId { get; set; }
+        public Activity activity { get; set; }
+        public virtual Park Park { get; set; }
     }
 
     public class ParkState
@@ -51,6 +57,24 @@ namespace Assignment4.DBModel
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string StateCode { get; set; }
+
+        public virtual Park Park { get; set; }
+    }
+
+    public class ParkImages
+    {
+        [Key]
+        public int ImageId { get; set; }
+
+        [ForeignKey("Park")]
+        public string ParkCode { get; set; }
+
+        public string ImageUrl { get; set; }
+        public string Title { get; set; }
+
+        public string Caption { get; set; }
+
+        public virtual Park Park { get; set; }
     }
 
     public class Fee
@@ -62,6 +86,8 @@ namespace Assignment4.DBModel
         public string ParkCode { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
+        public string Title { get; set; }
+        public virtual Park Park { get; set; }
 
     }
 
@@ -78,6 +104,8 @@ namespace Assignment4.DBModel
         public int Sites { get; set; }
 
         public List<Reservation> Reservations;
+
+        public virtual Park park { get; set; }
 
     }
 
@@ -117,6 +145,7 @@ namespace Assignment4.DBModel
         public int Nights { get; set; }
         public string Referral { get; set; }
         public string Comments { get; set; }
+        public virtual Campground campground { get; set; }
     }
 
 }

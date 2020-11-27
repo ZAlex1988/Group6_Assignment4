@@ -1,56 +1,42 @@
-//Make Footer stay at the bottom
-var states = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
-var parkCodes = [{ code: 'DENA', name: 'Denali National Park & Preserve'}, { code: 'GAAR', name: 'Gates Of The Arctic National Park & Preserve'}, { code: 'GLBA', name: 'Glacier Bay National Park & Preserve'}, { code: 'KATM', name: 'Katmai National Park & Preserve'}, { code: 'KEFJ', name: 'Kenai Fjords National Park'}, { code: 'KOVA', name: 'Kobuk Valley National Park'}, { code: 'LACL', name: 'Lake Clark National Park & Preserve'}, { code: 'WRST', name: 'Wrangell - St Elias National Park & Preserve'}, { code: 'HOSP', name: 'Hot Springs National Park'}, { code: 'GRCA', name: 'Grand Canyon National Park'}, { code: 'PEFO', name: 'Petrified Forest National Park'}, { code: 'SAGU', name: 'Saguaro National Park'}, { code: 'CHIS', name: 'Channel Islands National Park'}, { code: 'DEVA', name: 'Death Valley National Park'}, { code: 'JOTR', name: 'Joshua Tree National Park'}, { code: 'LAVO', name: 'Lassen Volcanic National Park'}, { code: 'PINN', name: 'Pinnacles National Park'}, { code: 'SEKI', name: 'Sequoia & Kings Canyon National Parks'}, { code: 'YOSE', name: 'Yosemite National Park'}, { code: 'BLCA', name: 'Black Canyon Of The Gunnison National Park'}, { code: 'GRSA', name: 'Great Sand Dunes National Park & Preserve'}, { code: 'MEVE', name: 'Mesa Verde National Park'}, { code: 'ROMO', name: 'Rocky Mountain National Park'}, { code: 'BISC', name: 'Biscayne National Park'}, { code: 'DRTO', name: 'Dry Tortugas National Park'}, { code: 'EVER', name: 'Everglades National Park'}, { code: 'HALE', name: 'Haleakala National Park'}, { code: 'HAVO', name: 'Hawaii Volcanoes National Park'}, { code: 'YELL', name: 'Yellowstone National Park'}, { code: 'INDU', name: 'Indiana Dunes National Park'}, { code: 'MACA', name: 'Mammoth Cave National Park'}, { code: 'ACAD', name: 'Acadia National Park'}, { code: 'ISRO', name: 'Isle Royale National Park'}, { code: 'VOYA', name: 'Voyageurs National Park'}, { code: 'JEFF', name: 'Gateway Arch National Park'}, { code: 'GLAC', name: 'Glacier National Park'}, { code: 'YELL', name: 'Yellowstone National Park'}, { code: 'GRSM', name: 'Great Smoky Mountains National Park'}, { code: 'THRO', name: 'Theodore Roosevelt National Park'}, { code: 'CAVE', name: 'Carlsbad Caverns National Park'}, { code: 'WHSA', name: 'White Sands National Park'}, { code: 'DEVA', name: 'Death Valley National Park'}, { code: 'GRBA', name: 'Great Basin National Park'}, { code: 'CUVA', name: 'Cuyahoga Valley National Park'}, { code: 'CRLA', name: 'Crater Lake National Park'}, { code: 'CONG', name: 'Congaree National Park'}, { code: 'BADL', name: 'Badlands National Park'}, { code: 'WICA', name: 'Wind Cave National Park'}, { code: 'GRSM', name: 'Great Smoky Mountains National Park'}, { code: 'BIBE', name: 'Big Bend National Park'}, { code: 'GUMO', name: 'Guadalupe Mountains National Park'}, { code: 'ARCH', name: 'Arches National Park'}, { code: 'BRCA', name: 'Bryce Canyon National Park'}, { code: 'CANY', name: 'Canyonlands National Park'}, { code: 'CARE', name: 'Capitol Reef National Park'}, { code: 'ZION', name: 'Zion National Park'}, { code: 'SHEN', name: 'Shenandoah National Park'}, { code: 'VIIS', name: 'Virgin Islands National Park'}, { code: 'MORA', name: 'Mount Rainier National Park'}, { code: 'NOCA', name: 'North Cascades National Park'}, { code: 'OLYM', name: 'Olympic National Park'}, { code: 'GRTE', name: 'Grand Teton National Park'}, { code: 'YELL', name: 'Yellowstone National Park'}];
-$(document).ready(function () {
-	//populate dropdowns
-	var parkCodeOptions = $("#park_code");	
-    parkCodes.forEach(parkCode => {
-        parkCodeOptions.append($("<option />").val(parkCode.code).text(parkCode.name));
-    });
-	
-	var stateOptions = $("#park_state");	
-    states.forEach(state => {
-        stateOptions.append($("<option />").val(state).text(state));
-    });
-	
-	stateOptions.prop("selectedIndex", -1);
-	parkCodeOptions.prop("selectedIndex", -1);
 
-});
-
-
-
-$(document).on('click','#search_click',function(){	
-	var parkName = $("#park_name").val().trim();
-	var parkState = $("#park_state").val();
-	var parkCode = $("#park_code").val();	
-
-	if (parkName != "" || parkState != null || parkCode != null) {
-		var query = 'parks?';
-		if (parkName != "") {
-			query = query + `q="${parkName}"`;
+async function callApi(uri, data) {
+	console.log(`Calling uri ${uri} with data ${JSON.stringify(data)}`);
+	const result = await $.ajax({
+		url: uri,
+		type: "POST",
+		data: JSON.stringify(data),
+		contentType: "application/json; charset=utf-8",		
+		dataType: "json",
+		error: function () {
+			console.log(`Error calling API: ${uri}`);
 		}
-		if (parkState != null && parkState != "") {
-			query = query + `&stateCode=${parkState}`;
-		};
-		if (parkCode != null  && parkCode != "") {
-			query = query + `&parkCode=${parkCode}`;
-		};
-			
-	
-		if (query != 'parks?') {
-			execQuery(query, 'parkSearch', '');	
-		} 
+	});
+	return result;
+}
+
+
+$(document).on('click', '#search_click', function () {	
+	var parkSearchInfo = {};
+	parkSearchInfo.description = $("#park_name").val().trim();
+	parkSearchInfo.state = $("#park_state").val();
+	parkSearchInfo.parkCode = $("#park_code").val();
+	if (parkSearchInfo.description != "" || parkSearchInfo.state != "" || parkSearchInfo.parkCode != "") {
+		callApi('/Search/FindParks', parkSearchInfo).then(json => {
+			console.log("Result fetched: " + JSON.stringify(json));
+			displayResults(json);
+		});
 	}
+
+	
 });
+
 
 $(document).on('click','#check_avail_button',function(){
 	var parkCode = $(this).attr("value");
 	if (parkCode !== undefined && parkCode != '') {
 		var query = `campgrounds?parkCode=${parkCode}`;
 		execQuery(query, 'campSearch', parkCode);
-	}
-	
+	}	
 	
 });
 
@@ -105,13 +91,11 @@ function displayCampgrounds(results, parkCode) {
 }
 
 function displayResults(res) {
-		console.log(res);
-		res = filterNationalParks(res);
-		if (res.total > 0) {			
+		if (res.length > 0) {			
 			$(".results").css("display", "block");
 			$(".output").empty();
-			$(".output").append(`<p><b>Results found:</b>${res.total}</p>`);
-			res.parks.forEach(park => {				
+			$(".output").append(`<p><b>Results found:</b>${res.length}</p>`);
+			res.forEach(park => {				
 				var activitiesStr = getActivities(park);
 				var feesTbl = getFeesTbl(park);
 				
@@ -135,32 +119,11 @@ function displayResults(res) {
 		}
 }
 
-function filterNationalParks(results) {
-	var filteredResults = {};
-	filteredResults.parks = [];
-	var counter = 0;
-	if (results !== undefined && results.total > 0) {
-		results.data.forEach(park => {
-			if (park.designation.includes("National Park")) {
-				counter = counter + 1;
-				filteredResults.parks.push(park);
-			}
-		});
-	}
-	filteredResults.total = counter;
-	return filteredResults;
-}
 
 function getActivities(park) {
 	var activitiesStr = '';
 	if (park.activities !== undefined) {
-		park.activities.forEach(activity => {
-			if (activitiesStr.length != 0) {
-				activitiesStr = activitiesStr + ', ' + activity.name;
-			} else {
-				activitiesStr = activity.name;
-			}
-		});
+		activitiesStr = park.activities.join(", ");
 	}
 	return activitiesStr;
 }
@@ -168,10 +131,10 @@ function getActivities(park) {
 function getFeesTbl(park) {
 	var feesTbl = '';
 	if (park.entranceFees !== undefined && park.entranceFees.length != 0) {
-		if (park.entranceFees.length == 1 & park.entranceFees[0].cost == "0.00") {
+		if (park.fees.length == 1 & park.fees[0].cost == "0.00") {
 			feesTbl = 'There is no entrance fee to the park';
 		} else {
-			park.entranceFees.forEach(feeObj => {
+			park.fees.forEach(feeObj => {
 				if (feesTbl.length == 0) {
 					feesTbl = `<thead><tr><th>Cost</th><th>Description</th></tr></thead><tbody><tr><td>${feeObj.cost}</td><td>${feeObj.title}</td></tr>`;
 				} else {

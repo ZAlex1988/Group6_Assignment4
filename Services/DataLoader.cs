@@ -162,8 +162,9 @@ namespace Assignment4.Services
         {
             Park park = new Park();
             park.ParkCode = ntPark.parkCode;
-            park.ParkName = ntPark.name;
+            park.ParkName = ntPark.fullName;
             park.ParkDescription = ntPark.description;
+            park.ParkUrl = ntPark.url;
             db.Park.Add(park);
             db.SaveChanges();
             foreach (Models.Activity ntParkActivity in ntPark.activities)
@@ -180,7 +181,14 @@ namespace Assignment4.Services
 
                     ParkActivity parkAct = new ParkActivity();
                     parkAct.ActivityId = activity.ActivityId;
-                    parkAct.ParkCode = park.ParkCode;
+                    parkAct.ParkCode = ntPark.parkCode;
+                    db.ParkActivity.Add(parkAct);
+                    db.SaveChanges();
+                } else
+                {
+                    ParkActivity parkAct = new ParkActivity();
+                    parkAct.ActivityId = ntParkActivity.id;
+                    parkAct.ParkCode = ntPark.parkCode;
                     db.ParkActivity.Add(parkAct);
                     db.SaveChanges();
                 }
@@ -191,9 +199,10 @@ namespace Assignment4.Services
                 foreach (Entrancefee ntParkFee in ntPark.entranceFees) 
                 {
                     DBModel.Fee fee = new DBModel.Fee();
-                    fee.ParkCode = park.ParkCode;
+                    fee.ParkCode = ntPark.parkCode;
                     fee.Cost = Decimal.Parse(ntParkFee.cost);
                     fee.Description = ntParkFee.description;
+                    fee.Title = ntParkFee.title;
                     db.Fee.Add(fee);
                 }
             }
@@ -202,15 +211,23 @@ namespace Assignment4.Services
             foreach (string state in ntPark.states.Split(","))
             {
                 ParkState parkState = new ParkState();
-                parkState.ParkCode = park.ParkCode;
+                parkState.ParkCode = ntPark.parkCode;
                 parkState.StateCode = state;
                 db.ParkState.Add(parkState);
             }
-
             db.SaveChanges();
 
+            foreach (Models.Image img in ntPark.images)
+            {
+                ParkImages image = new ParkImages();
+                image.ParkCode = ntPark.parkCode;
+                image.ImageUrl = img.url;
+                image.Title = img.title;
+                image.Caption = img.caption;
+                db.ParkImages.Add(image);
+            }
 
-
+            db.SaveChanges();
 
         }
 
