@@ -11,5 +11,7 @@ namespace Assignment4.Models
         public ReserveParams reserveRequest { get; set; }
         public Reservation Reservations { get; set; }
         public Boolean noResults { get; set; }
+        public Boolean showSearch { get; set; }
+        public string reservationId { get; set; }
     }
 }

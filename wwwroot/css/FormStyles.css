@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 #intro {    
     font-family: Arial;
     font-size: calc(3pt + 1vw);
@@ -51,7 +51,7 @@ select {
 	color: #fff;
 	margin: 0 auto;
 	padding: 7px 7px;
-	display:block;
+
 }
 .search_park_form_div button:hover,
 .search_park_form_div input[type=submit]:hover  {

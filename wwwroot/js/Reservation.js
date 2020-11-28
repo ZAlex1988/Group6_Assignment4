@@ -32,12 +32,3 @@ function prefillStaticDataForm() {
 	$("select[name=First_Date3] option[value=2021]").attr("selected", true).change();
 }
 
-$(document).on('click','#update_reservation',function(){
-	window.location.replace("Thankyou.html?action=update");
-	
-});
-
-$(document).on('click','#delete_reservation',function(){
-	window.location.replace("Thankyou.html?action=delete");
-	
-});

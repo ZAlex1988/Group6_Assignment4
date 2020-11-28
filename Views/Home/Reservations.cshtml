@@ -20,348 +20,350 @@
         <p id="intro">Please enter all the details below to make reservation for the campground you selected to stay at: </p>
     }
 
-    @if (Model.reserveRequest == null)
+    @if (Model.showSearch)
     {
         <div class="search_park_form_div" id="wider_reservation_search">
 
             <div class="search_reservation">
-                <label>Reservation ID: </label>
-                <input class="field-short" id="reservationNum" type="search" value="123" />
-                <button id="find_reservation">Search</button>
+                <form method="post" action ="/Reservation/Find">
+                    <label>Reservation ID: </label>
+                    <input class="field-short" id="reservationNum" type="search" name="resId" value="@(Model.reservationId != null ? Model.reservationId : "")" />
+                    <input type="submit" id="find_reservation" value="Search" />
+                </form>
             </div>
         </div>
     }
     @if (Model.noResults)
     {
         <div>
-            <p id="intro" class="no_results">Reservation Not Found! Please enter valid reservation number (123)</p>
+            <p id="intro" class="no_results">Reservation Not Found! Please enter valid reservation number</p>
         </div>
     }
     @if (Model.reserveRequest != null || Model.Reservations != null)
     {
-        <div class="search_park_form_div" id="wider_reservation_form">
-            <table width="100%" cellpadding="0" cellspacing="0">
-                <tr valign="top">
+<div class="search_park_form_div" id="wider_reservation_form">
+    <form method="POST" action="/Reservation/Thankyou">
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr valign="top">
 
-                    <td style="padding: 15px;">
-                        <!-- Left, wider white column -->
+                <td style="padding: 15px;">
+                    <!-- Left, wider white column -->
 
-                        <h2 class="treb-blue-150" style="margin: 0 0 1px 0;">
-                            Online Reservation Form
-                        </h2>
-                        <br>
-                        <table cellpadding=10 cellspacing=3 border=2>
-                            <tr>
-                                <td>
+                    <h2 class="treb-blue-150" style="margin: 0 0 1px 0;">
+                        Online Reservation Form
+                    </h2>
+                    <br>
+                    <table cellpadding=10 cellspacing=3 border=2>
+                        <tr>
+                            <td>
+                                @if (Model.showSearch)
+                                {
+                                    <div class="reservation_control_buttons">
+                                        <input type="submit" id="update_reservation" formaction="/Reservation/Update" value="Update" />
+                                        <input type="submit" id="delete_reservation" formaction="/Reservation/Delete" value="Delete" />
+                                    </div>
+                                }
+                                <font size="3" face="Arial">
+                                    <b>Reserve your site now by filling out the form below:</b>
+                                </font>
+                                                               
+                                <input type=hidden name="CampgroundId" value="@Model.reserveRequest.campId">
+                                <input type=hidden name="ReservationId" value="@Model.reservationId">
+                                <div class="reservation_params_frame">
                                     @if (Model.reserveRequest == null)
                                     {
-                                        <div class="reservation_control_buttons">
-                                            <button id="update_reservation">Update</button>
-                                            <button id="delete_reservation">Delete</button>
-                                        </div>
+                                        <label id="park_name">Park Name:</label><br>
+                                        <label id="camp_name">Campground:</label>
                                     }
-                                        <font size="3" face="Arial">
-                                            <b>Reserve your site now by filling out the form below:</b>
-                                        </font>
+                                    else
+                                    {
+                                        <label id="park_name">Park Name: @Model.reserveRequest.parkName </label><br>
+                                        <label id="camp_name">Campground: @Model.reserveRequest.campName</label>
+                                    }
+                                </div>
 
-                                        <form method="post" action="Thankyou.html">
-                                            <input type=hidden name="recipient" value="youraddress@yourdomain.com">
-                                            <input type=hidden name="subject" value="Reservation Form Submission">
-                                            <input type=hidden name="redirect" value="thankyou.html">
-                                            <div class="reservation_params_frame">
-                                                @if (Model.reserveRequest == null)
-                                                {
-                                                    <label id="park_name">Park Name:</label><br>
-                                                    <label id="camp_name">Campground:</label>
-                                                }
-                                                else
-                                                {
-                                                    <label id="park_name">Park Name: @Model.reserveRequest.parkName</label><br>
-                                                    <label id="camp_name">Campground: @Model.reserveRequest.campName</label>
-                                                }
-                                            </div>
+                                <table border=0 width=450>
 
-                                            <table border=0 width=450>
+                                    <tr><td>First Name(s):</td><td colspan=2> <input type="text" name="FirstName" size=30 value="@(Model.Reservations != null ? Model.Reservations.FirstName : "")"></td></tr>
+                                    <tr><td>Last Name:</td><td colspan=2> <input type="text" name="LastName" size=30 value="@(Model.Reservations != null ? Model.Reservations.LastName : "")"></td></tr>
+                                    <tr><td>Street Address:</td><td colspan=2> <input type="text" name="Address1" size=42 value="@(Model.Reservations != null ? Model.Reservations.Address1 : "")"></td></tr>
+                                    <tr><td>&nbsp; &nbsp; &nbsp; &nbsp; (continued):</td><td colspan=2> <input type="text" name="Address2" size=42 value="@(Model.Reservations != null ? Model.Reservations.Address2 : "")"></td></tr>
 
-                                                <tr><td>First Name(s):</td><td colspan=2> <input type="text" name="Cust_First_Names" size=30></td></tr>
-                                                <tr><td>Last Name:</td><td colspan=2> <input type="text" name="Cust_Last_Name" size=30></td></tr>
-                                                <tr><td>Street Address:</td><td colspan=2> <input type="text" name="Cust_Address_1" size=42></td></tr>
-                                                <tr><td>&nbsp; &nbsp; &nbsp; &nbsp; (continued):</td><td colspan=2> <input type="text" name="Cust_Address_2" size=42></td></tr>
+                                    <tr>
+                                        <td>City:<br> <input type="text" name="City" size=20 value="@(Model.Reservations != null ? Model.Reservations.City : "")"></td>&nbsp;
+                                        <td>State/Province:<br> <input type="text" name="State" size=5 value="@(Model.Reservations != null ? Model.Reservations.State : "")"></td>&nbsp;
+                                        <td>Zip/Postal Code:<br> <input type="text" name="Zip" size=10 value="@(Model.Reservations != null ? Model.Reservations.Zip : "")"></td>
 
-                                                <tr>
-                                                    <td>City:<br> <input type="text" name="Cust_City" size=20></td>&nbsp;
-                                                    <td>State/Province:<br> <input type="text" name="Cust_State" size=5></td>&nbsp;
-                                                    <td>Zip/Postal Code:<br> <input type="text" name="Cust_Zip" size=10></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country: </td>
+                                        <td colspan=2><input type="text" name="Country" size=15 value="@(Model.Reservations != null ? Model.Reservations.Country : "")"> (if non-U.S.)</td>
+                                    </tr>
 
-                                                </tr>
-                                                <tr>
-                                                    <td>Country: </td>
-                                                    <td colspan=2><input type="text" name="Cust_Country" size=15> (if non-U.S.)</td>
-                                                </tr>
+                                    <tr><td>Home Phone#: </td><td colspan=2> <input type="text" name="HomePhone" size=14 value="@(Model.Reservations != null ? Model.Reservations.HomePhone : "")"></td></tr>
+                                    <tr><td>Work Phone#: </td><td colspan=2> <input type="text" name="WorkPhone" size=14 value="@(Model.Reservations != null ? Model.Reservations.WorkPhone : "")"></td></tr>
+                                    <tr><td>Cell Phone#: </td><td colspan=2> <input type="text" name="CellPhone" size=14 value="@(Model.Reservations != null ? Model.Reservations.Cellphone : "")"></td></tr>
+                                    <tr><td>Email Address: </td><td colspan=2> <input type="text" name="Email" size=25 value="@(Model.Reservations != null ? Model.Reservations.Email : "")"></td></tr>
 
-                                                <tr><td>Home Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_1" size=14></td></tr>
-                                                <tr><td>Work Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_2" size=14></td></tr>
-                                                <tr><td>Cell Phone#: </td><td colspan=2> <input type="text" name="Cust_Phone_3" size=14></td></tr>
-                                                <tr><td>Email Address: </td><td colspan=2> <input type="text" name="Cust_Email" size=25></td></tr>
+                                    <tr>
+                                        <td>Type of Camper: </td>
+                                        <td colspan=2>
+                                            <select name="TypeOfCamper">                                                
+                                                <!option value="Diesel MH" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Diesel MH") ? "selected" : "")>Diesel Class A Motorhome</!option>
+                                                <!option value="Class A MH" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Class A MH") ? "selected" : "")>Gasoline Class A Motorhome</!option>
+                                                <!option value="Class C MH" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Class C MH") ? "selected" : "")>Class C Motorhome</!option>
+                                                <!option value="Class B MH" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Class B MH") ? "selected" : "")>Van or Class B Motorhome</!option>
+                                                <!option value="Truck Camper" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Truck Camper") ? "selected" : "")>Truck Camper</!option>
+                                                <!option value="Fifth Wheel" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Fifth Wheel") ? "selected" : "")>Fifth Wheel</!option>
+                                                <!option value="Trailer" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Trailer") ? "selected" : "")>Travel Trailer</!option>
+                                                <!option value="Popup" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Popup") ? "selected" : "")>Pop-Up Trailer</!option>
+                                                <!option value="Tent" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("Tent") ? "selected" : "")>Tent</!option>
+                                                <!option value="None" @(Model.Reservations != null && Model.Reservations.TypeOfCamper.Equals("None") ? "selected" : "")>None</!option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                                                <tr>
-                                                    <td>Type of Camper: </td>
-                                                    <td colspan=2>
-                                                        <select name="Rig_Type">
-                                                            <option value="Diesel MH">Diesel Class A Motorhome</option>
-                                                            <option value="Class A MH">Gasoline Class A Motorhome</option>
-                                                            <option value="Class C MH">Class C Motorhome</option>
-                                                            <option value="Class B MH">Van or Class B Motorhome</option>
-                                                            <option value="Truck Camper">Truck Camper</option>
-                                                            <option value="Fifth Wheel">Fifth Wheel</option>
-                                                            <option value="Trailer">Travel Trailer</option>
-                                                            <option value="Popup">Pop-Up Trailer</option>
-                                                            <option value="Tent">Tent</option>
-                                                            <option value="None">None</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                    <tr><td>Length of Camper: </td><td colspan=2>  <input type="number" name="LengthOfCamper" size=2 value="@(Model.Reservations != null ? Model.Reservations.LengthOfCamper.ToString() : "")">Feet</td></tr>
+                                </table>
 
-                                                <tr><td>Length of Camper: </td><td colspan=2>  <input type="text" name="Rig_Length" size=2>Feet</td></tr>
-                                            </table>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            Number of Adults?  <select name="Adults">
+                                                <!option value="1" @(Model.Reservations != null && Model.Reservations.Adults == 1 ? "selected" : "")>1</!option>
+                                                <!option value="2" @(Model.Reservations != null && Model.Reservations.Adults == 2 ? "selected" : "")>2</!option>
+                                                <!option value="3" @(Model.Reservations != null && Model.Reservations.Adults == 3 ? "selected" : "")>3</!option>
+                                                <!option value="4" @(Model.Reservations != null && Model.Reservations.Adults == 4 ? "selected" : "")>4</!option>
+                                                <!option value="5" @(Model.Reservations != null && Model.Reservations.Adults == 5 ? "selected" : "")>5</!option>
+                                                <!option value="6" @(Model.Reservations != null && Model.Reservations.Adults == 6 ? "selected" : "")>6</!option>
+                                            </select>
+                                            Children?  <select name="Children">
+                                                <!option value="0" @(Model.Reservations != null && Model.Reservations.Children == 0 ? "selected" : "")>0</!option>
+                                                <!option value="1" @(Model.Reservations != null && Model.Reservations.Children == 1 ? "selected" : "")>1</!option>
+                                                <!option value="2" @(Model.Reservations != null && Model.Reservations.Children == 2 ? "selected" : "")>2</!option>
+                                                <!option value="3" @(Model.Reservations != null && Model.Reservations.Children == 3 ? "selected" : "")>3</!option>
+                                                <!option value="4" @(Model.Reservations != null && Model.Reservations.Children == 4 ? "selected" : "")>4</!option>
+                                                <!option value="5" @(Model.Reservations != null && Model.Reservations.Children == 5 ? "selected" : "")>5</!option>
+                                                <!option value="6" @(Model.Reservations != null && Model.Reservations.Children == 6 ? "selected" : "")>6</!option>
+                                            </select><br>
+                                            Number of Pets?  <select name="Pets">
+                                                <!option value="0" @(Model.Reservations != null && Model.Reservations.Pets == 0 ? "selected" : "")>0</!option>
+                                                <!option value="1" @(Model.Reservations != null && Model.Reservations.Pets == 1 ? "selected" : "")>1</!option>
+                                                <!option value="2" @(Model.Reservations != null && Model.Reservations.Pets == 2 ? "selected" : "")>2</!option>
+                                                <!option value="3" @(Model.Reservations != null && Model.Reservations.Pets == 3 ? "selected" : "")>3</!option>
+                                                <!option value="4" @(Model.Reservations != null && Model.Reservations.Pets == 4 ? "selected" : "")>4</!option>
+                                            </select>
+                                            Description of pets:  <input type="text" name="PetDescription" size=14 value="@(Model.Reservations != null ? Model.Reservations.PetDescription : "")">
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        Number of Adults?  <select name="Num_Adults">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                        </select>
-                                                        Children?  <select name="Num_Children">
-                                                            <option value="0">0</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                        </select><br>
-                                                        Number of Pets?  <select name="Num_Pets">
-                                                            <option value="0">0</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                        </select>
-                                                        Description of pets:  <input type="text" name="Pets_Desc" size=14>
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                <table>
+                                    <tr>
 
-                                            <table>
-                                                <tr>
+                                        <td>
+                                            <br>
+                                            <b>Site Requirements:</b>
+                                            <br>
+                                            <br>
+                                            Number of sites: <input type="number" size=3 name="Sites" value="@(Model.Reservations != null ? Model.Reservations.Sites.ToString() : "")">
+                                            <br>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Type of site or accomodation:
+                                        </td>
+                                        <td>
+                                            <select name="TypeOfSite">
+                                                <!option value="Normal RV" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Normal RV") ? "selected" : "")>Normal RV Site</!option>
+                                                <!option value="Deluxe RV" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Deluxe RV") ? "selected" : "")>Deluxe RV Site</!option>
+                                                <!option value="Drycamp" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Drycamp") ? "selected" : "")>Dry camping area</!option>
+                                                <!option value="Tent" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Tent") ? "selected" : "")>Tent Site</!option>
+                                                <!option value="Cabin" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Cabin") ? "selected" : "")>Cabin</!option>
+                                                <!option value="Room" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Room") ? "selected" : "")>Motel Room</!option>
+                                                <!option value="Pavilion" @(Model.Reservations != null && Model.Reservations.TypeOfSite.Equals("Pavilion") ? "selected" : "")>Pavilion rental</!option>
+                                            </select> &nbsp; &nbsp;
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <input type="checkbox" value="true" name="FullHookup"  @(Model.Reservations != null && Model.Reservations.FullHookup ? "checked" : "")>Full Hook-Up
+                                            <br><input type="checkbox" value="true" name="Amp50Electric" @(Model.Reservations != null && Model.Reservations.Amp50Electric ? "checked" : "")>50 Amp Electric
+                                            <br><input type="checkbox" value="true" name="PullThrough" @(Model.Reservations != null && Model.Reservations.PullThrough ? "checked" : "")>Pull-Thru
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan=2>
+                                            Preferred Site(s):
+                                            <input type="text" size=30 name="PreferredSite" value="@(Model.Reservations != null ? Model.Reservations.PreferredSite : "")">
+                                        </td>
+                                    </tr>
+                                </table>
 
-                                                    <td>
-                                                        <br>
-                                                        <b>Site Requirements:</b>
-                                                        <br>
-                                                        <br>
-                                                        Number of sites: <input type="text" size=3 name="Num_Sites">
-                                                        <br>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        Type of site or accomodation:
-                                                    </td>
-                                                    <td>
-                                                        <select name="Site_Type">
-                                                            <option value="Normal RV">Normal RV Site</option>
-                                                            <option value="Deluxe RV">Deluxe RV Site</option>
-                                                            <option value="Drycamp">Dry camping area</option>
-                                                            <option value="Tent">Tent Site</option>
-                                                            <option value="Cabin">Cabin</option>
-                                                            <option value="Room">Motel Room</option>
-                                                            <option value="Pavilion">Pavilion rental</option>
-                                                        </select> &nbsp; &nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td></td>
-                                                    <td>
-                                                        <input type="checkbox" name="Attrib_Full-Hook-up">Full Hook-Up
-                                                        <br><input type="checkbox" name="Attrib_50A">50 Amp Electric
-                                                        <br><input type="checkbox" name="Attrib_Pullthru">Pull-Thru
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan=2>
-                                                        Preferred Site(s):
-                                                        <input type="text" size=30 name="Site_Name">
-                                                    </td>
-                                                </tr>
-                                            </table>
+                                <table>
+                                    <tr>
+                                        <td>
 
-                                            <table>
-                                                <tr>
-                                                    <td>
-
-                                                        <br><b>Dates Requested:</b>
-                                                        <br>&nbsp;
+                                            <br><b>Dates Requested:</b>
+                                            <br>&nbsp;
 
 
-                                                        <br>First Night:
-                                                        <select name="Resv_First_Date">
-                                                            <option Value="Select Month">Select Month</option>
-                                                            <option value="1">January</option>
-                                                            <option value="2">February</option>
-                                                            <option value="3">March</option>
-                                                            <option value="4">April</option>
-                                                            <option value="5">May</option>
-                                                            <option value="6">June</option>
-                                                            <option value="7">July</option>
-                                                            <option value="8">August</option>
-                                                            <option value="9">September</option>
-                                                            <option value="10">October</option>
-                                                            <option value="11">November</option>
-                                                            <option value="12">December</option>
-                                                        </select>
-                                                        <select name="First_Date2">
-                                                            <option value="Day">Day</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                            <option value="7">7</option>
-                                                            <option value="8">8</option>
-                                                            <option value="9">9</option>
-                                                            <option value="10">10</option>
-                                                            <option value="11">11</option>
-                                                            <option value="12">12</option>
-                                                            <option value="13">13</option>
-                                                            <option value="14">14</option>
-                                                            <option value="15">15</option>
-                                                            <option value="16">16</option>
-                                                            <option value="17">17</option>
-                                                            <option value="18">18</option>
-                                                            <option value="19">19</option>
-                                                            <option value="20">20</option>
-                                                            <option value="21">21</option>
-                                                            <option value="22">22</option>
-                                                            <option value="23">23</option>
-                                                            <option value="24">24</option>
-                                                            <option value="25">25</option>
-                                                            <option value="26">26</option>
-                                                            <option value="27">27</option>
-                                                            <option value="28">28</option>
-                                                            <option value="29">29</option>
-                                                            <option value="30">30</option>
-                                                            <option value="31">31</option>
-                                                        </select>
-                                                        <select name="First_Date3">
-                                                            <option value="2020">2020</option>
-                                                            <option value="2021">2021</option>
-                                                            <option value="2022">2022</option>
-                                                            <option value="2023">2023</option>
-                                                            <option value="2024">2024</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                            <br>First Night:
+                                            <select name="FirstNightMonth">
+                                                <option Value="Select Month">Select Month</option>
+                                                <!option value="1" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 1 ? "selected" : "")>January</!option>
+                                                <!option value="2" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 2 ? "selected" : "")>February</!option>
+                                                <!option value="3" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 3 ? "selected" : "")>March</!option>
+                                                <!option value="4" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 4 ? "selected" : "")>April</!option>
+                                                <!option value="5" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 5 ? "selected" : "")>May</!option>
+                                                <!option value="6" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 6 ? "selected" : "")>June</!option>
+                                                <!option value="7" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 7 ? "selected" : "")>July</!option>
+                                                <!option value="8" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 8 ? "selected" : "")>August</!option>
+                                                <!option value="9" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 9 ? "selected" : "")>September</!option>
+                                                <!option value="10" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 10 ? "selected" : "")>October</!option>
+                                                <!option value="11" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 11 ? "selected" : "")>November</!option>
+                                                <!option value="12" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Month == 12 ? "selected" : "")>December</!option>
+                                            </select>
+                                            <select name="FirstNightDay">
+                                                <!option value="Day">Day</!option>
+                                                <!option value="1" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 1 ? "selected" : "")>1</!option>
+                                                <!option value="2" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 2 ? "selected" : "")>2</!option>
+                                                <!option value="3" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 3 ? "selected" : "")>3</!option>
+                                                <!option value="4" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 4 ? "selected" : "")>4</!option>
+                                                <!option value="5" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 5 ? "selected" : "")>5</!option>
+                                                <!option value="6" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 6 ? "selected" : "")>6</!option>
+                                                <!option value="7" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 7 ? "selected" : "")>7</!option>
+                                                <!option value="8" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 8 ? "selected" : "")>8</!option>
+                                                <!option value="9" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 9 ? "selected" : "")>9</!option>
+                                                <!option value="10" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 10 ? "selected" : "")>10</!option>
+                                                <!option value="11" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 11 ? "selected" : "")>11</!option>
+                                                <!option value="12" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 12 ? "selected" : "")>12</!option>
+                                                <!option value="13" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 13 ? "selected" : "")>13</!option>
+                                                <!option value="14" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 14 ? "selected" : "")>14</!option>
+                                                <!option value="15" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 15 ? "selected" : "")>15</!option>
+                                                <!option value="16" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 16 ? "selected" : "")>16</!option>
+                                                <!option value="17" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 17 ? "selected" : "")>17</!option>
+                                                <!option value="18" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 18 ? "selected" : "")>18</!option>
+                                                <!option value="19" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 19 ? "selected" : "")>19</!option>
+                                                <!option value="20" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 20 ? "selected" : "")>20</!option>
+                                                <!option value="21" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 21 ? "selected" : "")>21</!option>
+                                                <!option value="22" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 22 ? "selected" : "")>22</!option>
+                                                <!option value="23" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 23 ? "selected" : "")>23</!option>
+                                                <!option value="24" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 24 ? "selected" : "")>24</!option>
+                                                <!option value="25" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 25 ? "selected" : "")>25</!option>
+                                                <!option value="26" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 26 ? "selected" : "")>26</!option>
+                                                <!option value="27" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 27 ? "selected" : "")>27</!option>
+                                                <!option value="28" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 28 ? "selected" : "")>28</!option>
+                                                <!option value="29" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 29 ? "selected" : "")>29</!option>
+                                                <!option value="30" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 30 ? "selected" : "")>30</!option>
+                                                <!option value="31" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Day == 31 ? "selected" : "")>31</!option>
+                                            </select>
+                                            <select name="FirstNightYear">
+                                                <!option value="2020" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Year == 2020 ? "selected" : "")>2020</!option>
+                                                <!option value="2021" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Year == 2021 ? "selected" : "")>2021</!option>
+                                                <!option value="2022" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Year == 2022 ? "selected" : "")>2022</!option>
+                                                <!option value="2023" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Year == 2023 ? "selected" : "")>2023</!option>
+                                                <!option value="2024" @(Model.Reservations != null && Model.Reservations.FirstNight != null && Model.Reservations.FirstNight.Year == 2024 ? "selected" : "")>2024</!option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
 
-                                                <tr>
-                                                    <td>
-                                                        Estimated arrival time:
-                                                        <select name="Est_Time">
-                                                            <option value="10 AM">10 AM</option>
-                                                            <option value="11 AM">11 </option>
-                                                            <option value="12 PM">12 PM</option>
-                                                            <option value="1 PM">1 PM</option>
-                                                            <option value="2 PM">2 PM</option>
-                                                            <option value="3 PM">3 PM</option>
-                                                            <option value="4 PM">4 PM</option>
-                                                            <option value="5 PM">5 PM</option>
-                                                            <option value="6 PM">6 PM</option>
-                                                            <option value="7 PM">7 PM</option>
-                                                            <option value="8 PM">8 PM</option>
-                                                            <option value="9 PM">9 PM</option>
-                                                            <option value="10PM">10 PM</option>
-                                                            <option value="11PM">11 PM</option>
-                                                            <option value="12AM">12 AM</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                    <tr>
+                                        <td>
+                                            Estimated arrival time:
+                                            <select name="ArrivalTime">
+                                                <!option value="10 AM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("10 AM") ? "selected" : "")>10 AM</!option>
+                                                <!option value="11 AM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("11 AM") ? "selected" : "")>11 </!option>
+                                                <!option value="12 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("12 PM") ? "selected" : "")>12 PM</!option>
+                                                <!option value="1 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("1 PM") ? "selected" : "")>1 PM</!option>
+                                                <!option value="2 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("2 PM") ? "selected" : "")>2 PM</!option>
+                                                <!option value="3 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("3 PM") ? "selected" : "")>3 PM</!option>
+                                                <!option value="4 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("4 PM") ? "selected" : "")>4 PM</!option>
+                                                <!option value="5 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("5 PM") ? "selected" : "")>5 PM</!option>
+                                                <!option value="6 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("6 PM") ? "selected" : "")>6 PM</!option>
+                                                <!option value="7 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("7 PM") ? "selected" : "")>7 PM</!option>
+                                                <!option value="8 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("8 PM") ? "selected" : "")>8 PM</!option>
+                                                <!option value="9 PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("9 PM") ? "selected" : "")>9 PM</!option>
+                                                <!option value="10PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("10 PM") ? "selected" : "")>10 PM</!option>
+                                                <!option value="11PM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("11 PM") ? "selected" : "")>11 PM</!option>
+                                                <!option value="12AM" @(Model.Reservations != null && Model.Reservations.ArrivalTime.Equals("12 AM") ? "selected" : "")>12 AM</!option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        Number of nights: <input type="text" name="Num_Nights" size=4>
-                                                    </td>
-                                                </tr>
+                                    <tr>
+                                        <td>
+                                            Number of nights: <input type="number" name="Nights" size=4 value="@(Model.Reservations != null ? Model.Reservations.Nights.ToString() : "")">
+                                        </td>
+                                    </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <br>How were you referred?  <select name="How_Found">
-                                                            <option value="Return visit">I've been here before</option>
-                                                            <option value="Friend">A Friend</option>
-                                                            <option value="Woodall's">Woodall's directory</option>
-                                                            <option value="Trailer Life">Trailer Life directory</option>
-                                                            <option value="Escapees">Escapees Directory</option>
-                                                            <option value="Coast/Coast">Coast to Coast</option>
-                                                            <option value="Passport Am.">Passport America</option>
-                                                            <option value="RPI">RPI directory</option>
-                                                            <option value="Other Guide">Other Camping Directory</option>
-                                                            <option value="Trailer Life Mag">Trailer Life Magazine</option>
-                                                            <option value="Motor Home">Motor Home Magazine</option>
-                                                            <option value="FMCA Mag">FMCA Magazine</option>
-                                                            <option value="Highways Mag">Highways Magazine</option>
-                                                            <option value="Camping Life">Camping Life Magazine</option>
-                                                            <option value="RV Companion">RV Companion Magazine</option>
-                                                            <option value="Magazine">Other Magazine</option>
-                                                            <option value="Phone book">Phone book</option>
-                                                            <option value="Internet">Internet</option>
-                                                            <option value="Signs">Highway Sign</option>
-                                                            <option value="Drove By">Drove By</option>
-                                                            <option value="AAA">AAA Auto club</option>
-                                                            <option value="Rally">RV Rally</option>
-                                                            <option value="Sports show">Sports show</option>
-                                                            <option value="Brochure">Brochure</option>
-                                                            <option value="Flyer">Flyer</option>
-                                                            <option value="TV">Television</option>
-                                                            <option value="Radio">Radio</option>
-                                                            <option value="Mail">Direct Mail</option>
-                                                            <option value="Chamber/Comm">Chamber of Commerce</option>
-                                                            <option value="Travel Info Ctr">Travel Information Center</option>
-                                                            <option value="Other">Other</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                    <tr>
+                                        <td>
+                                            <br>How were you referred?  <select name="Referral">
+                                                <!option value="Return visit"  @(Model.Reservations != null && Model.Reservations.Referral.Equals("Return visit") ? "selected" : "")>I've been here before</!option>
+                                                <!option value="Friend" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Friend") ? "selected" : "")>A Friend</!option>
+                                                <!option value="Woodall's" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Woodall's") ? "selected" : "")>Woodall's directory</!option>
+                                                <!option value="Trailer Life" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Trailer Life") ? "selected" : "")>Trailer Life directory</!option>
+                                                <!option value="Escapees" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Escapees") ? "selected" : "")>Escapees Directory</!option>
+                                                <!option value="Coast/Coast" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Coast/Coast") ? "selected" : "")>Coast to Coast</!option>
+                                                <!option value="Passport Am." @(Model.Reservations != null && Model.Reservations.Referral.Equals("Passport Am.") ? "selected" : "")>Passport America</!option>
+                                                <!option value="RPI" @(Model.Reservations != null && Model.Reservations.Referral.Equals("RPI") ? "selected" : "")>RPI directory</!option>
+                                                <!option value="Other Guide" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Other Guide") ? "selected" : "")>Other Camping Directory</!option>
+                                                <!option value="Trailer Life Mag" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Trailer Life Mag") ? "selected" : "")>Trailer Life Magazine</!option>
+                                                <!option value="Motor Home" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Motor Home") ? "selected" : "")>Motor Home Magazine</!option>
+                                                <!ption value="FMCA Mag" @(Model.Reservations != null && Model.Reservations.Referral.Equals("FMCA Mag") ? "selected" : "")>FMCA Magazine</!ption>
+                                                <!option value="Highways Mag" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Highways Mag") ? "selected" : "")>Highways Magazine</!option>
+                                                <!option value="Camping Life" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Camping Life") ? "selected" : "")>Camping Life Magazine</!option>
+                                                <!option value="RV Companion" @(Model.Reservations != null && Model.Reservations.Referral.Equals("RV Companion") ? "selected" : "")>RV Companion Magazine</!option>
+                                                <!option value="Magazine" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Magazine") ? "selected" : "")>Other Magazine</!option>
+                                                <!option value="Phone book" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Phone book") ? "selected" : "")>Phone book</!option>
+                                                <!option value="Internet" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Internet") ? "selected" : "")>Internet</!option>
+                                                <!option value="Signs" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Signs") ? "selected" : "")>Highway Sign</!option>
+                                                <!option value="Drove By" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Drove By") ? "selected" : "")>Drove By</!option>
+                                                <!option value="AAA" @(Model.Reservations != null && Model.Reservations.Referral.Equals("AAA") ? "selected" : "")>AAA Auto club</!option>
+                                                <!option value="Rally" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Rally") ? "selected" : "")>RV Rally</!option>
+                                                <!option value="Sports show" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Sports show") ? "selected" : "")>Sports show</!option>
+                                                <!option value="Brochure" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Brochure") ? "selected" : "")>Brochure</!option>
+                                                <!option value="Flyer" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Flyer") ? "selected" : "")>Flyer</!option>
+                                                <!option value="TV" @(Model.Reservations != null && Model.Reservations.Referral.Equals("TV") ? "selected" : "")>Television</!option>
+                                                <!option value="Radio" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Radio") ? "selected" : "")>Radio</!option>
+                                                <!option value="Mail" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Mail") ? "selected" : "")>Direct Mail</!option>
+                                                <!option value="Chamber/Comm" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Chamber/Comm") ? "selected" : "")>Chamber of Commerce</!option>
+                                                <!option value="Travel Info Ctr" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Travel Info Ctr") ? "selected" : "")>Travel Information Center</!option>
+                                                <!option value="Other" @(Model.Reservations != null && Model.Reservations.Referral.Equals("Other") ? "selected" : "")>Other</!option>
+                                            </select>
+                                        </td>
+                                    </tr>
 
-                                                <tr><td>&nbsp;</td></tr>
-                                                <tr>
-                                                    <td>
-                                                        Special Needs or Comments:
-                                                        <br><textarea NAME="Resv_Notes" ROWS=7 COLS=36></textarea>
-                                                    </td>
-                                                </tr>
-                                                <tr><td>&nbsp;</td></tr>
+                                    <tr><td>&nbsp;</td></tr>
+                                    <tr>
+                                        <td>
+                                            Special Needs or Comments:
+                                            <br><textarea NAME="Comments" ROWS=7 COLS=36 value="@(Model.Reservations != null ? Model.Reservations.Comments : "")"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr><td>&nbsp;</td></tr>
 
-                                            </table>
-                                        </form>
-                                    </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
+                                </table>
 
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        @if (!Model.showSearch)
+        {
             <div class="form_lines">
                 <input type="submit" id="search_click_button" />
-
             </div>
+        }
+    </form>
 
-
-        </div>
+</div>
     }
     </div>
 
