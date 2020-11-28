@@ -179,7 +179,7 @@ namespace Assignment4.Services
         {
             Park park = new Park();
             park.ParkCode = ntPark.parkCode;
-            park.ParkName = ntPark.fullName;
+            park.ParkName = ntPark.fullName.Contains("Haleakal") ? "Haleakala" : ntPark.fullName;
             park.ParkDescription = ntPark.description;
             park.ParkUrl = ntPark.url;
             db.Park.Add(park);
