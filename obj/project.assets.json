@@ -79,6 +79,149 @@
           }
         }
       },
+      "Microsoft.Data.Tools.Msbuild/16.0.62004.28040": {
+        "type": "package",
+        "compile": {
+          "lib/net46/Microsoft.Data.Tools.Components.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Contracts.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Schema.Tasks.Sql.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Schema.Utilities.Sql.dll": {},
+          "lib/net46/Microsoft.SqlServer.ConnectionInfo.dll": {},
+          "lib/net46/Microsoft.SqlServer.SqlClrProvider.dll": {},
+          "lib/net46/SqlPackage.exe": {}
+        },
+        "runtime": {
+          "lib/net46/Microsoft.Data.Tools.Components.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Contracts.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Schema.Tasks.Sql.dll": {},
+          "lib/net46/Microsoft.Data.Tools.Schema.Utilities.Sql.dll": {},
+          "lib/net46/Microsoft.SqlServer.ConnectionInfo.dll": {},
+          "lib/net46/Microsoft.SqlServer.SqlClrProvider.dll": {},
+          "lib/net46/SqlPackage.exe": {}
+        },
+        "resource": {
+          "lib/net46/de-DE/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/net46/de-DE/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/net46/de-DE/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/net46/de-DE/SqlPackage.resources.dll": {
+            "locale": "de-DE"
+          },
+          "lib/net46/es-ES/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "es-ES"
+          },
+          "lib/net46/es-ES/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "es-ES"
+          },
+          "lib/net46/es-ES/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "es-ES"
+          },
+          "lib/net46/es-ES/SqlPackage.resources.dll": {
+            "locale": "es-ES"
+          },
+          "lib/net46/fr-FR/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "lib/net46/fr-FR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "lib/net46/fr-FR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "lib/net46/fr-FR/SqlPackage.resources.dll": {
+            "locale": "fr-FR"
+          },
+          "lib/net46/it-IT/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "it-IT"
+          },
+          "lib/net46/it-IT/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "it-IT"
+          },
+          "lib/net46/it-IT/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "it-IT"
+          },
+          "lib/net46/it-IT/SqlPackage.resources.dll": {
+            "locale": "it-IT"
+          },
+          "lib/net46/ja-JP/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "lib/net46/ja-JP/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "lib/net46/ja-JP/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "lib/net46/ja-JP/SqlPackage.resources.dll": {
+            "locale": "ja-JP"
+          },
+          "lib/net46/ko-KR/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "ko-KR"
+          },
+          "lib/net46/ko-KR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "ko-KR"
+          },
+          "lib/net46/ko-KR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "ko-KR"
+          },
+          "lib/net46/ko-KR/SqlPackage.resources.dll": {
+            "locale": "ko-KR"
+          },
+          "lib/net46/pt-BR/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net46/pt-BR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net46/pt-BR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net46/pt-BR/SqlPackage.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net46/ru-RU/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "lib/net46/ru-RU/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "lib/net46/ru-RU/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "lib/net46/ru-RU/SqlPackage.resources.dll": {
+            "locale": "ru-RU"
+          },
+          "lib/net46/zh-Hans/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net46/zh-Hans/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net46/zh-Hans/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net46/zh-Hans/SqlPackage.resources.dll": {
+            "locale": "zh-Hans"
+          },
+          "lib/net46/zh-Hant/Microsoft.Data.Tools.Components.resources.dll": {
+            "locale": "zh-Hant"
+          },
+          "lib/net46/zh-Hant/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll": {
+            "locale": "zh-Hant"
+          },
+          "lib/net46/zh-Hant/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll": {
+            "locale": "zh-Hant"
+          },
+          "lib/net46/zh-Hant/SqlPackage.resources.dll": {
+            "locale": "zh-Hant"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore/5.0.0": {
         "type": "package",
         "dependencies": {
@@ -1550,6 +1693,68 @@
         "runtimes/win-x64/native/Microsoft.Data.SqlClient.SNI.pdb",
         "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.dll",
         "runtimes/win-x86/native/Microsoft.Data.SqlClient.SNI.pdb"
+      ]
+    },
+    "Microsoft.Data.Tools.Msbuild/16.0.62004.28040": {
+      "sha512": "eqwZHo+QUGlhhRJMCFtmodIkufQ9uS4T27tGoFjVc6kJj0snBmdHM0284difQ1skpIWq0ofIZ9hVjowhAEgemw==",
+      "type": "package",
+      "path": "microsoft.data.tools.msbuild/16.0.62004.28040",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "icon.png",
+        "lib/net46/Microsoft.Data.Tools.Components.dll",
+        "lib/net46/Microsoft.Data.Tools.Contracts.dll",
+        "lib/net46/Microsoft.Data.Tools.Schema.SqlTasks.targets",
+        "lib/net46/Microsoft.Data.Tools.Schema.Tasks.Sql.dll",
+        "lib/net46/Microsoft.Data.Tools.Schema.Utilities.Sql.dll",
+        "lib/net46/Microsoft.SqlServer.ConnectionInfo.dll",
+        "lib/net46/Microsoft.SqlServer.SqlClrProvider.dll",
+        "lib/net46/SqlPackage.exe",
+        "lib/net46/SqlPackage.exe.config",
+        "lib/net46/de-DE/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/de-DE/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/de-DE/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/de-DE/SqlPackage.resources.dll",
+        "lib/net46/es-ES/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/es-ES/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/es-ES/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/es-ES/SqlPackage.resources.dll",
+        "lib/net46/fr-FR/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/fr-FR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/fr-FR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/fr-FR/SqlPackage.resources.dll",
+        "lib/net46/it-IT/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/it-IT/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/it-IT/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/it-IT/SqlPackage.resources.dll",
+        "lib/net46/ja-JP/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/ja-JP/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/ja-JP/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/ja-JP/SqlPackage.resources.dll",
+        "lib/net46/ko-KR/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/ko-KR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/ko-KR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/ko-KR/SqlPackage.resources.dll",
+        "lib/net46/pt-BR/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/pt-BR/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/pt-BR/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/pt-BR/SqlPackage.resources.dll",
+        "lib/net46/ru-RU/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/ru-RU/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/ru-RU/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/ru-RU/SqlPackage.resources.dll",
+        "lib/net46/zh-Hans/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/zh-Hans/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/zh-Hans/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/zh-Hans/SqlPackage.resources.dll",
+        "lib/net46/zh-Hant/Microsoft.Data.Tools.Components.resources.dll",
+        "lib/net46/zh-Hant/Microsoft.Data.Tools.Schema.Tasks.Sql.resources.dll",
+        "lib/net46/zh-Hant/Microsoft.Data.Tools.Schema.Utilities.Sql.resources.dll",
+        "lib/net46/zh-Hant/SqlPackage.resources.dll",
+        "microsoft.data.tools.msbuild.16.0.62004.28040.nupkg.sha512",
+        "microsoft.data.tools.msbuild.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore/5.0.0": {
@@ -5377,6 +5582,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.Data.Tools.Msbuild >= 16.0.62004.28040",
       "Microsoft.EntityFrameworkCore >= 5.0.0",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.3",
@@ -5420,6 +5626,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.Data.Tools.Msbuild": {
+            "target": "Package",
+            "version": "[16.0.62004.28040, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.0, )"
@@ -5460,5 +5670,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Data.Tools.Msbuild 16.0.62004.28040' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Data.Tools.Msbuild",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

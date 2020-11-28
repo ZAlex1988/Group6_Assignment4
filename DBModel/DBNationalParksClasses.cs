@@ -112,11 +112,11 @@ namespace Assignment4.DBModel
     public class Reservation
     {
         [Key]
-        public int ReservationId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid ReservationId { get; set; }
 
         [ForeignKey("Campground")]
         public string CampgroundId { get; set; }
-        public string ReservationCode { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address1 { get; set; }
@@ -140,8 +140,9 @@ namespace Assignment4.DBModel
         public bool Amp50Electric { get; set; }
         public bool FullHookup { get; set; }
         public bool PullThrough { get; set; }
+        public string PreferredSite { get; set; }
         public DateTime FirstNight { get; set; }
-        public DateTime ArrivalTime { get; set; }
+        public string ArrivalTime { get; set; }
         public int Nights { get; set; }
         public string Referral { get; set; }
         public string Comments { get; set; }

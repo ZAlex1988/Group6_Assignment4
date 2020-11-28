@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Thank you!";
+}
+
+@section custom_js_css {
+    <link href="/CSS/FormStyles.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/About.css" rel="stylesheet" type="text/css">
+    <!--script src="/js/Reservation.js"></!-script>
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="/js/Thankyou.js"></script-->
+}
+
+@model ThankYouPageModel
+
+<div class="bodycont">
+    <h1 align="center">National Park Reservation</h1>
+    @if (Model.type.Equals("Reserve"))
+    {
+        <p id="intro">Thank you so much for making reservations for the campground. See you once you visit the campground for your stay. Please save your reservation id: @Model.reservationId</p>
+    }
+    else if (Model.type.Equals("Update"))
+    {
+        <p id="intro">Your reservation id: @Model.reservationId was successfully updated!</p>
+    }
+    else if (Model.type.Equals("Delete"))
+    {
+        <p id="intro">Sorry to see you go! Your reservation id: @Model.reservationId was successfully deleted!</p>
+    }
+    else 
+    {
+        <p id="intro">You can't get here from there... Something went wrong, please try again</p>
+    }
+    <p id="intro" class="action_message"></p>
+    <div class="results">
+        <div class="output">
+        </div>
+    </div>
+    <div class="thankyou_img_container"><img class="image" src="/Images/Thankyou.jpg" /></div>
+</div>
+
