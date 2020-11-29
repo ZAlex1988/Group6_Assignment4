@@ -113,7 +113,6 @@ C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\runti
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\National-Parks-Api-Grp-6-Assignment-4 - Web Deploy\profile.arm.json
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Alexander\source\repos\Group6_Assignment4\obj\Debug\netcoreapp3.1\Razor\Views\Home\Thankyou.cshtml.g.cs
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Microsoft.Data.Tools.Components.dll
@@ -165,3 +164,4 @@ C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\zh-Ha
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\zh-Hant\SqlPackage.resources.dll
 C:\Users\Alexander\source\repos\Group6_Assignment4\obj\Debug\netcoreapp3.1\Assignment4.csproj.CoreCompileInputs.cache
 C:\Users\Alexander\source\repos\Group6_Assignment4\obj\Debug\netcoreapp3.1\Assignment4.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\NationalParkReservations - Web Deploy\profile.arm.json

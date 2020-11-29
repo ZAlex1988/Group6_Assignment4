@@ -18,7 +18,7 @@ namespace Assignment4.DBModel
 
     public class Park
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ParkCode { get; set; }
         public string ParkName { get; set; }
         public string ParkDescription { get; set; }
@@ -38,20 +38,20 @@ namespace Assignment4.DBModel
 
     public class ParkActivity
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("Park")]
         public string ParkCode { get; set; }
 
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("Activity")]
         public string ActivityId { get; set; }
-        public Activity activity { get; set; }
+        public virtual Activity activity { get; set; }
         public virtual Park Park { get; set; }
     }
 
     public class ParkState
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("Park")]
         public string ParkCode { get; set; }
 
@@ -66,7 +66,7 @@ namespace Assignment4.DBModel
         [Key]
         public int ImageId { get; set; }
 
-        [ForeignKey("Park")]
+        [ForeignKey("Park"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ParkCode { get; set; }
 
         public string ImageUrl { get; set; }
@@ -82,7 +82,7 @@ namespace Assignment4.DBModel
         [Key]
         public int FeeId { get; set; }
 
-        [ForeignKey("Park")]
+        [ForeignKey("Park"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string ParkCode { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
@@ -95,17 +95,17 @@ namespace Assignment4.DBModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CampgroundId { get; set; }
-
-        [ForeignKey("Park")]
-        public string ParkCode { get; set; }
         public string CampgroundName { get; set; }
         public string CampgroundDescription { get; set; }
         public int MaxReservation { get; set; }
         public int Sites { get; set; }
-        public Boolean reservable { get; set; }
+        public Boolean Reservable { get; set; }
+
+        [ForeignKey("Park"), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public string ParkCode { get; set; }
 
         public List<Reservation> Reservations;
-        public virtual Park park { get; set; }
+        public virtual Park Park { get; set; }
 
     }
 
@@ -115,7 +115,7 @@ namespace Assignment4.DBModel
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ReservationId { get; set; }
 
-        [ForeignKey("Campground")]
+        [ForeignKey("Campground"), DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string CampgroundId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

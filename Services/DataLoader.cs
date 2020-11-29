@@ -168,7 +168,7 @@ namespace Assignment4.Services
                 camp.CampgroundName = ntCamp.name;
                 camp.Sites = int.Parse(ntCamp.campsites.totalSites);
                 camp.MaxReservation = camp.Sites;
-                camp.reservable = ntCamp.reservationUrl != null && !ntCamp.reservationUrl.Equals("");
+                camp.Reservable = ntCamp.reservationUrl != null && !ntCamp.reservationUrl.Equals("");
                 db.Campground.Add(camp);
             }
             db.SaveChanges();
