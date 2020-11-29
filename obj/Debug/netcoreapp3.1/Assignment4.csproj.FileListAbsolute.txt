@@ -164,4 +164,4 @@ C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\zh-Ha
 C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\zh-Hant\SqlPackage.resources.dll
 C:\Users\Alexander\source\repos\Group6_Assignment4\obj\Debug\netcoreapp3.1\Assignment4.csproj.CoreCompileInputs.cache
 C:\Users\Alexander\source\repos\Group6_Assignment4\obj\Debug\netcoreapp3.1\Assignment4.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\NationalParkReservations - Web Deploy\profile.arm.json
+C:\Users\Alexander\source\repos\Group6_Assignment4\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\NationalParksReservations - Web Deploy\profile.arm.json
